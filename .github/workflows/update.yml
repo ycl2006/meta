@@ -2,15 +2,22 @@ name: Update Video Rules
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 每天凌晨自动运行
-  workflow_dispatch:      # 允许手动触发执行
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # 添加权限声明，这是 2026 年 GitHub Actions 的标准写法
+    permissions:
+      contents: write 
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          # 显式使用 GitHub 提供的令牌
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -22,8 +29,22 @@ jobs:
 
       - name: Commit and Push
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add MyVideo.list
-          git commit -m "Update rules from db.json" || exit 0
-          git push
+          # 使用官方的 Bot 账号，更不容易报权限错
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # 只有文件存在才添加
+          if [ -f MyVideo.list ]; then
+            git add MyVideo.list
+            # 检查是否有内容变更，防止空提交导致的 128 错误
+            if git diff --staged --quiet; then
+              echo "No changes to commit"
+            else
+              git commit -m "自动更新影视规则列表"
+              # 使用带 Token 的远程地址进行推送
+              git push origin HEAD:${{ github.ref }}
+            fi
+          else
+            echo "Error: MyVideo.list not found!"
+            exit 1
+          fi
