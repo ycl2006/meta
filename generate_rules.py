@@ -18,7 +18,7 @@ def get_deep_domains(api_url):
                 # 匹配所有 http/https 链接
                 urls = re.findall(r'https?://[^\$,\s]+', play_url)
                 for u in urls:
-                    domain = urlparse(u).netloc
+                    domain = urlparse(u).netloc.split(':')[0]
                     if domain:
                         # 只要域名部分
                         found_domains.add(domain)
