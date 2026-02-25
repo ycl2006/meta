@@ -35,7 +35,7 @@ def get_deep_domains(api_url):
                         if domain and len(domain) > 3:
                             found_domains.add(domain)
                             
-                            # --- 🧠 逻辑 1：提取前缀词根 (如 v12.qewbn.com -> v) ---
+                            # 提取前缀词根 (如 v12.qewbn.com -> v)
                             parts = domain.split('.')
                             if len(parts) >= 3:
                                 prefix = parts[0]
@@ -44,15 +44,13 @@ def get_deep_domains(api_url):
                                     if len(keyword) >= 2:
                                         found_keywords.add(keyword)
 
-                            # --- 🧠 逻辑 2：提取主域核心 (如 wwzycdn.10cong.com -> 10cong) ---
-                            # 增加这个逻辑来对付境外采集站
+                            # 提取主域核心 (如 wwzycdn.10cong.com -> 10cong)
                             if len(parts) >= 2:
-                                main_name = parts[-2] # 拿到倒数第二个元素
-                                # 如果主域名是这种乱码或特定代号，抓下来
+                                main_name = parts[-2]
                                 if len(main_name) > 4: 
                                     found_keywords.add(main_name)
             
-            time.sleep(0.5) # 稍微缩短间歇，提速
+            time.sleep(0.5)
         except Exception as e:
             print(f"      ⚠️ 第 {i+1} 次尝试失败: {e}")
             
@@ -70,11 +68,10 @@ def generate():
         db = json.load(f)
 
     all_domains = set()
-    
-    # --- 🟢 重点：手动扩充预设词库，拦截已知境外采集站 ---
+    # 初始关键词库
     all_keywords = {
         "m3u8", "index.m3u8", "yyv", "cdnlz", "yzzy", 
-        "wwzy", "10cong", "bfzy", "jszy", "hhzy", "ffzy"
+        "wwzy", "10cong", "bfzy", "jszy", "360zy", "360zyx"
     } 
 
     print(f"🚀 开始深度扫描 {len(db.get('sites', []))} 个采集站 API...")
@@ -92,41 +89,22 @@ def generate():
         all_domains.update(domains)
         all_keywords.update(keywords)
 
+    # --- 核心修正：写入逻辑必须在 generate 函数内部，才能访问 all_keywords ---
     with open('MyVideo.list', 'w', encoding='utf-8') as f:
-        f.write("# ----------------------------------------------------------\n")
-        f.write(f"# 2026 自动生成精确直连规则 (境外采集站增强版)\n")
-        f.write(f"# 更新时间: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write("# ----------------------------------------------------------\n\n")
-        
-        f.write("# [关键词补漏 - 应对境外乱码域名]\n")
-        for kw in sorted(list(all_keywords)):
-            # 过滤掉太短或太通用的词，防止误杀
-            if kw and kw not in ["com", "net", "org", "www"]:
-                f.write(f"DOMAIN-KEYWORD,{kw}\n")
-        
-        f.write("\n# [精确域名匹配]\n")
-        for d in sorted(list(all_domains)):
-            if d: f.write(f"DOMAIN-SUFFIX,{d}\n")
-            
-    print(f"✅ 生成完毕！捕获域名: {len(all_domains)}，提取词根: {len(all_keywords)}")
-
-if __name__ == "__main__":
-    generate()
-# --- 核心修正：写入符合 Clash Classic (YAML) 格式的文件 ---
-    with open('MyVideo.list', 'w', encoding='utf-8') as f:
-        # 1. 必须有 payload 头部
         f.write("payload:\n")
         
-        # 2. 写入关键词规则（必须有 2 个空格缩进和杠符号）
         print("✍️ 正在写入关键词规则...")
         for kw in sorted(list(all_keywords)):
+            # 过滤无效词
             if kw and kw not in ["com", "net", "org", "www", "cdn"]:
                 f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
         
-        # 3. 写入后缀规则（必须有 2 个空格缩进和杠符号）
         print("✍️ 正在写入域名后缀规则...")
         for d in sorted(list(all_domains)):
             if d:
                 f.write(f"  - DOMAIN-SUFFIX,{d}\n")
             
-    print(f"✅ 转换完毕！文件已适配 clash-classic 格式。")
+    print(f"✅ 生成完毕！捕获域名: {len(all_domains)}，提取词根: {len(all_keywords)}")
+
+if __name__ == "__main__":
+    generate()
