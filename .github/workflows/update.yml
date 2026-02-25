@@ -2,13 +2,12 @@ name: Update Video Rules
 
 on:
   schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+    - cron: '0 0 * * *' # 每天凌晨自动运行
+  workflow_dispatch:      # 允许手动触发执行
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # 显式声明最高权限
     permissions:
       contents: write
       
@@ -16,7 +15,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          # 必须设为 0 以获取所有历史，防止推送失败
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -25,28 +23,25 @@ jobs:
         with:
           python-version: '3.x'
 
+      - name: Install dependencies
+        run: pip install requests
+
       - name: Run script
         run: python generate_rules.py
 
       - name: Commit and Push
         env:
-          # 使用 GitHub 自动生成的 Token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # 1. 配置身份
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # 2. 只有文件变化才操作
           if [ -f MyVideo.list ]; then
             git add MyVideo.list
             if git diff --staged --quiet; then
               echo "No changes detected, skipping commit."
             else
-              git commit -m "Auto-update rules from db.json"
-              
-              # 3. 暴力推送：直接将 Token 注入 URL 确保权限通过
-              # 这里的 origin HEAD 会推送到当前分支
+              git commit -m "Auto-update rules with deep inspection"
               git push "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:${{ github.ref_name }}
             fi
           else
