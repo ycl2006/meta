@@ -1,4 +1,0 @@
-payload:
-  - URL-PATH,api.php/provide/vod
-  - URL-PATH,inc/api_mac10.php
-  - URL-PATH,inc/apijson.php
