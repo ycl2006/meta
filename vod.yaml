@@ -1,0 +1,5 @@
+# 影视资源站规则
+rules:
+  - DOMAIN-SUFFIX,example.com,DIRECT
+  - DOMAIN-KEYWORD,vod,DIRECT
+  - DOMAIN-SUFFIX,otherdomain.com,REJECT
