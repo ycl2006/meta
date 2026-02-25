@@ -1,5 +1,17 @@
-# 深度扫描自动生成的精确域名直连列表
-# 总计捕获域名数量: 97
+# ----------------------------------------------------------
+# 2026 自动生成精确直连规则 (多路径扫描版)
+# 更新时间: 2026-02-25 11:58:19
+# ----------------------------------------------------------
+
+# [关键词补漏]
+DOMAIN-KEYWORD,cdn
+DOMAIN-KEYWORD,cdnlz
+DOMAIN-KEYWORD,index.m3u8
+DOMAIN-KEYWORD,m3u8
+DOMAIN-KEYWORD,yyv
+DOMAIN-KEYWORD,yzzy
+
+# [精确域名匹配]
 DOMAIN-SUFFIX,1080p.huyall.com
 DOMAIN-SUFFIX,360zy.com
 DOMAIN-SUFFIX,api.1080zyku.com
@@ -15,6 +27,7 @@ DOMAIN-SUFFIX,app.bfzyapi.com
 DOMAIN-SUFFIX,bfikuncdn.com
 DOMAIN-SUFFIX,bfzyapi.com
 DOMAIN-SUFFIX,c1.ddbbffcdn.com
+DOMAIN-SUFFIX,c1.rrcdnbf2.com
 DOMAIN-SUFFIX,c1.rrcdnbf5.com
 DOMAIN-SUFFIX,c1.rrcdnbf6.com
 DOMAIN-SUFFIX,caiji.dyttzyapi.com
@@ -22,12 +35,14 @@ DOMAIN-SUFFIX,cdn.ryplay10.com
 DOMAIN-SUFFIX,cdn.ryplay11.com
 DOMAIN-SUFFIX,cdn.ryplay12.com
 DOMAIN-SUFFIX,cdn.wlcdn99.com
+DOMAIN-SUFFIX,cdn.yzzy27-play.com
 DOMAIN-SUFFIX,cdn.yzzy28-play.com
 DOMAIN-SUFFIX,cdn.yzzy31-play.com
 DOMAIN-SUFFIX,cdn.yzzy33-play.com
 DOMAIN-SUFFIX,cdn.yzzyvip-29.com
 DOMAIN-SUFFIX,cdn.yzzyvip-32.com
 DOMAIN-SUFFIX,cdn4.ryplay4.com
+DOMAIN-SUFFIX,cdn7.ryplay7.com
 DOMAIN-SUFFIX,cj.ffzyapi.com
 DOMAIN-SUFFIX,cj.lziapi.com
 DOMAIN-SUFFIX,cj.rycjapi.com
@@ -46,6 +61,7 @@ DOMAIN-SUFFIX,p.bvvvvvvv7f.com
 DOMAIN-SUFFIX,p.bvvvvvvvvv1f.com
 DOMAIN-SUFFIX,play.hhuus.com
 DOMAIN-SUFFIX,play.modujx11.com
+DOMAIN-SUFFIX,play.phimgood.com
 DOMAIN-SUFFIX,play.xluuss.com
 DOMAIN-SUFFIX,s1.fengbao9.com
 DOMAIN-SUFFIX,s2.bfllvip.com
@@ -60,10 +76,15 @@ DOMAIN-SUFFIX,tyyszyapi.com
 DOMAIN-SUFFIX,tyyszywvod1.com
 DOMAIN-SUFFIX,ukzy.ukubf8.com
 DOMAIN-SUFFIX,ukzyvod3.ukubf5.com
+DOMAIN-SUFFIX,v.cdnlz14.com
 DOMAIN-SUFFIX,v.cdnlz21.com
+DOMAIN-SUFFIX,v.cdnlz22.com
 DOMAIN-SUFFIX,v.cdnlz29.com
+DOMAIN-SUFFIX,v.cdnlz3.com
+DOMAIN-SUFFIX,v.cdnlz9.com
 DOMAIN-SUFFIX,v.fengbao8.com
 DOMAIN-SUFFIX,v.gsuus.com
+DOMAIN-SUFFIX,v.lzcdn27.com
 DOMAIN-SUFFIX,v1.qsstvw.com
 DOMAIN-SUFFIX,v10.qsstvw.com
 DOMAIN-SUFFIX,v11.qsstvw.com
@@ -78,15 +99,24 @@ DOMAIN-SUFFIX,v6.lbv325627.com
 DOMAIN-SUFFIX,v6.qsstvw.com
 DOMAIN-SUFFIX,v7.qsstvw.com
 DOMAIN-SUFFIX,v8.qsstvw.com
+DOMAIN-SUFFIX,v8.zuidazym3u8.com
 DOMAIN-SUFFIX,v9.qsstvw.com
+DOMAIN-SUFFIX,vip.dytt-cine.com
+DOMAIN-SUFFIX,vip.dytt-cinema.com
+DOMAIN-SUFFIX,vip.dytt-hot.com
+DOMAIN-SUFFIX,vip.dytt-luck.com
+DOMAIN-SUFFIX,vip.dytt-tvs.com
 DOMAIN-SUFFIX,vip.ffzy-online3.com
 DOMAIN-SUFFIX,vip.ffzy-online4.com
 DOMAIN-SUFFIX,vip.ffzy-online5.com
 DOMAIN-SUFFIX,vip.ffzy-play5.com
 DOMAIN-SUFFIX,vip.ffzy-plays.com
 DOMAIN-SUFFIX,vip.ffzy-video.com
+DOMAIN-SUFFIX,vip.lz-cdn14.com
+DOMAIN-SUFFIX,vip.lz-cdn9.com
 DOMAIN-SUFFIX,vod.360zyx.vip
 DOMAIN-SUFFIX,vv.jisuzyv.com
+DOMAIN-SUFFIX,vvip.high26-playback.com
 DOMAIN-SUFFIX,wangwangzyvod.com
 DOMAIN-SUFFIX,wolongzyw.com
 DOMAIN-SUFFIX,www.a0887.icu
