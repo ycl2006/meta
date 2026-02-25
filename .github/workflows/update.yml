@@ -8,15 +8,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # 添加权限声明，这是 2026 年 GitHub Actions 的标准写法
+    # 显式声明最高权限
     permissions:
-      contents: write 
+      contents: write
       
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          # 显式使用 GitHub 提供的令牌
+          # 必须设为 0 以获取所有历史，防止推送失败
+          fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
@@ -28,23 +29,27 @@ jobs:
         run: python generate_rules.py
 
       - name: Commit and Push
+        env:
+          # 使用 GitHub 自动生成的 Token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # 使用官方的 Bot 账号，更不容易报权限错
+          # 1. 配置身份
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # 只有文件存在才添加
+          # 2. 只有文件变化才操作
           if [ -f MyVideo.list ]; then
             git add MyVideo.list
-            # 检查是否有内容变更，防止空提交导致的 128 错误
             if git diff --staged --quiet; then
-              echo "No changes to commit"
+              echo "No changes detected, skipping commit."
             else
-              git commit -m "自动更新影视规则列表"
-              # 使用带 Token 的远程地址进行推送
-              git push origin HEAD:${{ github.ref }}
+              git commit -m "Auto-update rules from db.json"
+              
+              # 3. 暴力推送：直接将 Token 注入 URL 确保权限通过
+              # 这里的 origin HEAD 会推送到当前分支
+              git push "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:${{ github.ref_name }}
             fi
           else
-            echo "Error: MyVideo.list not found!"
+            echo "Error: MyVideo.list missing!"
             exit 1
           fi
