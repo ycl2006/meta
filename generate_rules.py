@@ -112,3 +112,21 @@ def generate():
 
 if __name__ == "__main__":
     generate()
+# --- 核心修正：写入符合 Clash Classic (YAML) 格式的文件 ---
+    with open('MyVideo.list', 'w', encoding='utf-8') as f:
+        # 1. 必须有 payload 头部
+        f.write("payload:\n")
+        
+        # 2. 写入关键词规则（必须有 2 个空格缩进和杠符号）
+        print("✍️ 正在写入关键词规则...")
+        for kw in sorted(list(all_keywords)):
+            if kw and kw not in ["com", "net", "org", "www", "cdn"]:
+                f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
+        
+        # 3. 写入后缀规则（必须有 2 个空格缩进和杠符号）
+        print("✍️ 正在写入域名后缀规则...")
+        for d in sorted(list(all_domains)):
+            if d:
+                f.write(f"  - DOMAIN-SUFFIX,{d}\n")
+            
+    print(f"✅ 转换完毕！文件已适配 clash-classic 格式。")
