@@ -103,24 +103,50 @@ def generate():
         all_domains.update(domains)
         all_keywords.update(keywords)
 
-    # --- 3. 过滤与持久化 ---
-    # 过滤掉黑名单和无效词
-    exclude = ["com", "net", "org", "www", "cdn", "index", "html", "payload", "github"]
+    # --- 3. 终极过滤与去重逻辑 ---
+    exclude = ["com", "net", "org", "www", "cdn", "index", "html", "payload", "github", "vip"]
     
-    final_keywords = sorted([k for k in all_keywords if k and len(k) > 1 and k not in exclude])
-    final_domains = sorted([d for d in all_domains if d and "." in d])
+    # a. 预处理关键词：去重、合并词根（如 play-cdn10 -> play-cdn）
+    processed_keywords = set()
+    for k in all_keywords:
+        if not k or len(k) <= 1 or k in exclude:
+            continue
+        # 核心逻辑：如果词根是以字母开头接数字结尾的，统一截取字母部分
+        # 例如：play-cdn12 -> play-cdn, cdnlz29 -> cdnlz
+        base_kw = re.sub(r'\d+$', '', k)
+        if len(base_kw) > 2: # 确保截取后的词根依然有意义
+            processed_keywords.add(base_kw)
+        else:
+            processed_keywords.add(k)
 
+    # b. 过滤域名后缀：如果域名包含已有的关键词，则剔除
+    final_keywords = sorted(list(processed_keywords))
+    final_domains = []
+    
+    # 按照长度从短到长排序域名，方便逻辑判断
+    sorted_raw_domains = sorted(list(all_domains), key=len)
+    for d in sorted_raw_domains:
+        if not d or "." not in d:
+            continue
+        # 检查该域名是否被现有的任何关键词覆盖
+        is_covered = any(kw in d for kw in final_keywords)
+        if not is_covered:
+            # 同时也检查是否被已存入的短后缀覆盖
+            if not any(d.endswith("." + existing) for existing in final_domains):
+                final_domains.add(d) if isinstance(final_domains, set) else final_domains.append(d)
+
+    # c. 写入文件
     with open(OUTPUT_LIST, 'w', encoding='utf-8') as f:
         f.write("payload:\n")
-        print(f"✍️ 写入关键词 ({len(final_keywords)} 条)")
+        
+        print(f"✍️ 优化后写入关键词 ({len(final_keywords)} 条)")
         for kw in final_keywords:
             f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
         
-        print(f"✍️ 写入域名后缀 ({len(final_domains)} 条)")
-        for d in final_domains:
+        print(f"✍️ 优化后写入域名后缀 ({len(final_domains)} 条)")
+        for d in sorted(final_domains):
             f.write(f"  - DOMAIN-SUFFIX,{d}\n")
             
-    print(f"✅ 处理完成！总规模：域名 {len(final_domains)}，词根 {len(final_keywords)}")
-
+    print(f"✨ 瘦身成功！总规则数从冗余状态大幅缩减。")
 if __name__ == "__main__":
     generate()
