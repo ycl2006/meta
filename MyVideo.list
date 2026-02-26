@@ -1,8 +1,8 @@
 payload:
-  - DOMAIN-KEYWORD,05men
   - DOMAIN-KEYWORD,10cong
   - DOMAIN-KEYWORD,360zy
   - DOMAIN-KEYWORD,360zyx
+  - DOMAIN-KEYWORD,a0887
   - DOMAIN-KEYWORD,bfikuncdn
   - DOMAIN-KEYWORD,bfllvip
   - DOMAIN-KEYWORD,bfvvs
@@ -10,29 +10,30 @@ payload:
   - DOMAIN-KEYWORD,bvvvvvvv7f
   - DOMAIN-KEYWORD,bvvvvvvvvv1f
   - DOMAIN-KEYWORD,cdnlz
-  - DOMAIN-KEYWORD,cdnlz13
   - DOMAIN-KEYWORD,cdnlz18
   - DOMAIN-KEYWORD,cdnlz21
   - DOMAIN-KEYWORD,cdnlz22
-  - DOMAIN-KEYWORD,cdnlz7
   - DOMAIN-KEYWORD,ddbbffcdn
   - DOMAIN-KEYWORD,dytt-cine
   - DOMAIN-KEYWORD,dytt-cinema
+  - DOMAIN-KEYWORD,dytt-hot
   - DOMAIN-KEYWORD,dytt-luck
+  - DOMAIN-KEYWORD,dytt-network
+  - DOMAIN-KEYWORD,dytt-see
   - DOMAIN-KEYWORD,dytt-tvs
   - DOMAIN-KEYWORD,fengbao8
   - DOMAIN-KEYWORD,fengbao9
   - DOMAIN-KEYWORD,ffzy-online1
   - DOMAIN-KEYWORD,ffzy-online3
+  - DOMAIN-KEYWORD,ffzy-online4
   - DOMAIN-KEYWORD,ffzy-online5
+  - DOMAIN-KEYWORD,ffzy-online6
   - DOMAIN-KEYWORD,ffzy-play10
   - DOMAIN-KEYWORD,ffzy-play5
   - DOMAIN-KEYWORD,ffzy-plays
   - DOMAIN-KEYWORD,ffzy-video
   - DOMAIN-KEYWORD,ffzyread1
-  - DOMAIN-KEYWORD,ffzyread2
   - DOMAIN-KEYWORD,gsuus
-  - DOMAIN-KEYWORD,guoluche
   - DOMAIN-KEYWORD,hhuus
   - DOMAIN-KEYWORD,high1-playback
   - DOMAIN-KEYWORD,high20-playback
@@ -46,26 +47,19 @@ payload:
   - DOMAIN-KEYWORD,jisuzyv
   - DOMAIN-KEYWORD,jszy
   - DOMAIN-KEYWORD,lbv325627
-  - DOMAIN-KEYWORD,lfthirtytwo
-  - DOMAIN-KEYWORD,lz-cdn11
-  - DOMAIN-KEYWORD,lz-cdn12
-  - DOMAIN-KEYWORD,lz-cdn13
-  - DOMAIN-KEYWORD,lz-cdn5
-  - DOMAIN-KEYWORD,lzcdn10
+  - DOMAIN-KEYWORD,lz15uu
   - DOMAIN-KEYWORD,lzcdn23
-  - DOMAIN-KEYWORD,lzcdn25
   - DOMAIN-KEYWORD,lzcdn27
   - DOMAIN-KEYWORD,lzcdn28
   - DOMAIN-KEYWORD,lzcdn31
-  - DOMAIN-KEYWORD,lzcdn32
   - DOMAIN-KEYWORD,m3u8
-  - DOMAIN-KEYWORD,modujx10
   - DOMAIN-KEYWORD,modujx11
   - DOMAIN-KEYWORD,modujx12
   - DOMAIN-KEYWORD,modujx13
   - DOMAIN-KEYWORD,modujx14
   - DOMAIN-KEYWORD,modujx15
   - DOMAIN-KEYWORD,modujx16
+  - DOMAIN-KEYWORD,phimgood
   - DOMAIN-KEYWORD,play-cdn10
   - DOMAIN-KEYWORD,play-cdn11
   - DOMAIN-KEYWORD,play-cdn12
@@ -77,28 +71,27 @@ payload:
   - DOMAIN-KEYWORD,play-cdn18
   - DOMAIN-KEYWORD,play-cdn19
   - DOMAIN-KEYWORD,play-cdn2
+  - DOMAIN-KEYWORD,play-cdn3
+  - DOMAIN-KEYWORD,play-cdn4
   - DOMAIN-KEYWORD,play-cdn6
   - DOMAIN-KEYWORD,play-cdn7
   - DOMAIN-KEYWORD,play-cdn9
   - DOMAIN-KEYWORD,playback-speed
   - DOMAIN-KEYWORD,qsstvw
-  - DOMAIN-KEYWORD,rrcdnbf2
-  - DOMAIN-KEYWORD,rrcdnbf4
   - DOMAIN-KEYWORD,rrcdnbf5
   - DOMAIN-KEYWORD,rrcdnbf6
   - DOMAIN-KEYWORD,ryiplay18
+  - DOMAIN-KEYWORD,ryplay10
   - DOMAIN-KEYWORD,ryplay11
-  - DOMAIN-KEYWORD,ryplay12
   - DOMAIN-KEYWORD,ryplay14
-  - DOMAIN-KEYWORD,ryplay15
   - DOMAIN-KEYWORD,ryplay16
   - DOMAIN-KEYWORD,ryplay17
+  - DOMAIN-KEYWORD,ryplay4
   - DOMAIN-KEYWORD,ryplay7
   - DOMAIN-KEYWORD,tyyszywvod
   - DOMAIN-KEYWORD,tyyszywvod1
   - DOMAIN-KEYWORD,ukubf3
   - DOMAIN-KEYWORD,ukubf4
-  - DOMAIN-KEYWORD,ukubf5
   - DOMAIN-KEYWORD,vip
   - DOMAIN-KEYWORD,wangwangzyvod
   - DOMAIN-KEYWORD,wlcdn99
@@ -111,7 +104,7 @@ payload:
   - DOMAIN-KEYWORD,yzzy28-play
   - DOMAIN-KEYWORD,yzzy31-play
   - DOMAIN-KEYWORD,yzzy33-play
-  - DOMAIN-KEYWORD,yzzy34-play
+  - DOMAIN-KEYWORD,yzzy5-play
   - DOMAIN-KEYWORD,yzzyvip-29
   - DOMAIN-KEYWORD,yzzyvip-32
   - DOMAIN-KEYWORD,zuidazym3u8
@@ -130,21 +123,19 @@ payload:
   - DOMAIN-SUFFIX,bfikuncdn.com
   - DOMAIN-SUFFIX,bfzyapi.com
   - DOMAIN-SUFFIX,c1.ddbbffcdn.com
-  - DOMAIN-SUFFIX,c1.rrcdnbf2.com
-  - DOMAIN-SUFFIX,c1.rrcdnbf4.com
   - DOMAIN-SUFFIX,c1.rrcdnbf5.com
   - DOMAIN-SUFFIX,c1.rrcdnbf6.com
   - DOMAIN-SUFFIX,caiji.dyttzyapi.com
+  - DOMAIN-SUFFIX,cdn.ryplay10.com
   - DOMAIN-SUFFIX,cdn.ryplay11.com
-  - DOMAIN-SUFFIX,cdn.ryplay12.com
   - DOMAIN-SUFFIX,cdn.wlcdn99.com
   - DOMAIN-SUFFIX,cdn.yzzy27-play.com
   - DOMAIN-SUFFIX,cdn.yzzy28-play.com
   - DOMAIN-SUFFIX,cdn.yzzy31-play.com
   - DOMAIN-SUFFIX,cdn.yzzy33-play.com
-  - DOMAIN-SUFFIX,cdn.yzzy34-play.com
   - DOMAIN-SUFFIX,cdn.yzzyvip-29.com
   - DOMAIN-SUFFIX,cdn.yzzyvip-32.com
+  - DOMAIN-SUFFIX,cdn4.ryplay4.com
   - DOMAIN-SUFFIX,cdn7.ryplay7.com
   - DOMAIN-SUFFIX,cj.ffzyapi.com
   - DOMAIN-SUFFIX,cj.lziapi.com
@@ -163,25 +154,25 @@ payload:
   - DOMAIN-SUFFIX,p.bvvvvvvv7f.com
   - DOMAIN-SUFFIX,p.bvvvvvvvvv1f.com
   - DOMAIN-SUFFIX,play.hhuus.com
-  - DOMAIN-SUFFIX,play.modujx10.com
   - DOMAIN-SUFFIX,play.modujx11.com
   - DOMAIN-SUFFIX,play.modujx12.com
   - DOMAIN-SUFFIX,play.modujx13.com
   - DOMAIN-SUFFIX,play.modujx14.com
   - DOMAIN-SUFFIX,play.modujx15.com
   - DOMAIN-SUFFIX,play.modujx16.com
+  - DOMAIN-SUFFIX,play.phimgood.com
   - DOMAIN-SUFFIX,play.xluuss.com
-  - DOMAIN-SUFFIX,s1.bfllvip.com
   - DOMAIN-SUFFIX,s1.fengbao9.com
   - DOMAIN-SUFFIX,s2.bfllvip.com
+  - DOMAIN-SUFFIX,super.ffzy-online6.com
   - DOMAIN-SUFFIX,svip.high1-playback.com
   - DOMAIN-SUFFIX,svip.high20-playback.com
   - DOMAIN-SUFFIX,svip.high23-playback.com
   - DOMAIN-SUFFIX,svip.high24-playback.com
   - DOMAIN-SUFFIX,svip.high25-playback.com
+  - DOMAIN-SUFFIX,svip.high26-playback.com
   - DOMAIN-SUFFIX,svip.ryiplay18.com
   - DOMAIN-SUFFIX,svip.ryplay14.com
-  - DOMAIN-SUFFIX,svip.ryplay15.com
   - DOMAIN-SUFFIX,svip.ryplay16.com
   - DOMAIN-SUFFIX,svip.ryplay17.com
   - DOMAIN-SUFFIX,svip.yyzy-play.vip
@@ -193,22 +184,16 @@ payload:
   - DOMAIN-SUFFIX,tyyszywvod1.com
   - DOMAIN-SUFFIX,ukzy.ukubf3.com
   - DOMAIN-SUFFIX,ukzy.ukubf4.com
-  - DOMAIN-SUFFIX,ukzyvod3.ukubf5.com
-  - DOMAIN-SUFFIX,v.cdnlz13.com
   - DOMAIN-SUFFIX,v.cdnlz18.com
   - DOMAIN-SUFFIX,v.cdnlz21.com
   - DOMAIN-SUFFIX,v.cdnlz22.com
-  - DOMAIN-SUFFIX,v.cdnlz7.com
   - DOMAIN-SUFFIX,v.fengbao8.com
   - DOMAIN-SUFFIX,v.gsuus.com
-  - DOMAIN-SUFFIX,v.lfthirtytwo.com
+  - DOMAIN-SUFFIX,v.lz15uu.com
   - DOMAIN-SUFFIX,v.lzcdn23.com
-  - DOMAIN-SUFFIX,v.lzcdn25.com
   - DOMAIN-SUFFIX,v.lzcdn27.com
   - DOMAIN-SUFFIX,v.lzcdn28.com
   - DOMAIN-SUFFIX,v.lzcdn31.com
-  - DOMAIN-SUFFIX,v.lzcdn32.com
-  - DOMAIN-SUFFIX,v1.lzcdn32.com
   - DOMAIN-SUFFIX,v1.qsstvw.com
   - DOMAIN-SUFFIX,v1.zuidazym3u8.com
   - DOMAIN-SUFFIX,v10.qsstvw.com
@@ -220,6 +205,7 @@ payload:
   - DOMAIN-SUFFIX,v13.zuidazym3u8.com
   - DOMAIN-SUFFIX,v14.zuidazym3u8.com
   - DOMAIN-SUFFIX,v2.qsstvw.com
+  - DOMAIN-SUFFIX,v2.yzzy5-play.com
   - DOMAIN-SUFFIX,v2.zuidazym3u8.com
   - DOMAIN-SUFFIX,v3.qsstvw.com
   - DOMAIN-SUFFIX,v3.zuidazym3u8.com
@@ -238,34 +224,31 @@ payload:
   - DOMAIN-SUFFIX,v9.zuidazym3u8.com
   - DOMAIN-SUFFIX,vip.dytt-cine.com
   - DOMAIN-SUFFIX,vip.dytt-cinema.com
+  - DOMAIN-SUFFIX,vip.dytt-hot.com
   - DOMAIN-SUFFIX,vip.dytt-luck.com
+  - DOMAIN-SUFFIX,vip.dytt-network.com
+  - DOMAIN-SUFFIX,vip.dytt-see.com
   - DOMAIN-SUFFIX,vip.dytt-tvs.com
   - DOMAIN-SUFFIX,vip.ffzy-online1.com
   - DOMAIN-SUFFIX,vip.ffzy-online3.com
+  - DOMAIN-SUFFIX,vip.ffzy-online4.com
   - DOMAIN-SUFFIX,vip.ffzy-online5.com
   - DOMAIN-SUFFIX,vip.ffzy-play10.com
   - DOMAIN-SUFFIX,vip.ffzy-play5.com
   - DOMAIN-SUFFIX,vip.ffzy-plays.com
   - DOMAIN-SUFFIX,vip.ffzy-video.com
-  - DOMAIN-SUFFIX,vip.ffzyread2.com
-  - DOMAIN-SUFFIX,vip.lz-cdn11.com
-  - DOMAIN-SUFFIX,vip.lz-cdn12.com
-  - DOMAIN-SUFFIX,vip.lz-cdn13.com
-  - DOMAIN-SUFFIX,vip.lzcdn10.com
-  - DOMAIN-SUFFIX,vip1.lz-cdn5.com
   - DOMAIN-SUFFIX,vip15.play-cdn15.com
   - DOMAIN-SUFFIX,vod.360zyx.vip
-  - DOMAIN-SUFFIX,vod.guoluche.com
   - DOMAIN-SUFFIX,vv.jisuzyv.com
   - DOMAIN-SUFFIX,vvip.high26-playback.com
   - DOMAIN-SUFFIX,wangwangzyvod.com
   - DOMAIN-SUFFIX,wolongzyw.com
+  - DOMAIN-SUFFIX,www.a0887.icu
   - DOMAIN-SUFFIX,www.hongniuzy2.com
   - DOMAIN-SUFFIX,www.huyaapi.com
   - DOMAIN-SUFFIX,www.mdzyapi.com
   - DOMAIN-SUFFIX,www.moduzy.com
   - DOMAIN-SUFFIX,wwzy.tv
-  - DOMAIN-SUFFIX,wwzycdn.05men.com
   - DOMAIN-SUFFIX,yzzy.play-cdn10.com
   - DOMAIN-SUFFIX,yzzy.play-cdn11.com
   - DOMAIN-SUFFIX,yzzy.play-cdn12.com
@@ -275,6 +258,8 @@ payload:
   - DOMAIN-SUFFIX,yzzy.play-cdn18.com
   - DOMAIN-SUFFIX,yzzy.play-cdn19.com
   - DOMAIN-SUFFIX,yzzy.play-cdn2.com
+  - DOMAIN-SUFFIX,yzzy.play-cdn3.com
+  - DOMAIN-SUFFIX,yzzy.play-cdn4.com
   - DOMAIN-SUFFIX,yzzy.play-cdn6.com
   - DOMAIN-SUFFIX,yzzy.play-cdn7.com
   - DOMAIN-SUFFIX,yzzy.play-cdn9.com
