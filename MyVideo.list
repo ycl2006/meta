@@ -13,6 +13,7 @@ payload:
   - DOMAIN-KEYWORD,cdnlz18
   - DOMAIN-KEYWORD,cdnlz21
   - DOMAIN-KEYWORD,cdnlz22
+  - DOMAIN-KEYWORD,cdnlz29
   - DOMAIN-KEYWORD,ddbbffcdn
   - DOMAIN-KEYWORD,dytt-cine
   - DOMAIN-KEYWORD,dytt-cinema
@@ -47,6 +48,7 @@ payload:
   - DOMAIN-KEYWORD,jisuzyv
   - DOMAIN-KEYWORD,jszy
   - DOMAIN-KEYWORD,lbv325627
+  - DOMAIN-KEYWORD,lfthirtytwo
   - DOMAIN-KEYWORD,lz15uu
   - DOMAIN-KEYWORD,lzcdn23
   - DOMAIN-KEYWORD,lzcdn27
@@ -120,6 +122,7 @@ payload:
   - DOMAIN-SUFFIX,api.xinlangapi.com
   - DOMAIN-SUFFIX,api.zuidapi.com
   - DOMAIN-SUFFIX,app.bfzyapi.com
+  - DOMAIN-SUFFIX,bdzybf22.com
   - DOMAIN-SUFFIX,bfikuncdn.com
   - DOMAIN-SUFFIX,bfzyapi.com
   - DOMAIN-SUFFIX,c1.ddbbffcdn.com
@@ -162,6 +165,7 @@ payload:
   - DOMAIN-SUFFIX,play.modujx16.com
   - DOMAIN-SUFFIX,play.phimgood.com
   - DOMAIN-SUFFIX,play.xluuss.com
+  - DOMAIN-SUFFIX,qewbn.com
   - DOMAIN-SUFFIX,s1.fengbao9.com
   - DOMAIN-SUFFIX,s2.bfllvip.com
   - DOMAIN-SUFFIX,super.ffzy-online6.com
@@ -187,8 +191,10 @@ payload:
   - DOMAIN-SUFFIX,v.cdnlz18.com
   - DOMAIN-SUFFIX,v.cdnlz21.com
   - DOMAIN-SUFFIX,v.cdnlz22.com
+  - DOMAIN-SUFFIX,v.cdnlz29.com
   - DOMAIN-SUFFIX,v.fengbao8.com
   - DOMAIN-SUFFIX,v.gsuus.com
+  - DOMAIN-SUFFIX,v.lfthirtytwo.com
   - DOMAIN-SUFFIX,v.lz15uu.com
   - DOMAIN-SUFFIX,v.lzcdn23.com
   - DOMAIN-SUFFIX,v.lzcdn27.com
@@ -265,5 +271,3 @@ payload:
   - DOMAIN-SUFFIX,yzzy.play-cdn9.com
   - DOMAIN-SUFFIX,yzzy1.play-cdn16.com
   - DOMAIN-SUFFIX,yzzy21.playback-speed.com
-  - DOMAIN-SUFFIX,qewbn.com
-  - DOMAIN-SUFFIX,bdzybf22.com
