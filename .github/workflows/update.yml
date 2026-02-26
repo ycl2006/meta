@@ -2,7 +2,7 @@ name: Update Video Rules
 
 on:
   schedule:
-    # 0 0,8,16 分别对应北京时间的 08:00, 16:00, 00:00
+    # 北京时间：08:00, 16:00, 00:00 (对应 UTC: 00, 08, 16)
     - cron: '0 0,8,16 * * *' 
   workflow_dispatch: # 保留手动触发，方便随时调试
 
@@ -10,42 +10,43 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # 必须赋予写入权限，否则 push 会失败
       
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # 升级到 v4
         with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0 # 拉取所有历史记录，确保 git diff 准确
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # 升级到 v5
         with:
-          python-version: '3.x'
+          python-version: '3.10'
 
       - name: Install dependencies
         run: pip install requests
 
       - name: Run script
+        # ⚠️ 请确保你的 Python 脚本文件名确实是 generate_rules.py
         run: python generate_rules.py
 
       - name: Commit and Push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
+          # 检查文件是否存在
           if [ -f MyVideo.list ]; then
             git add MyVideo.list
+            
+            # 只有在文件内容真正发生变化时才提交
             if git diff --staged --quiet; then
-              echo "No changes detected, skipping commit."
+              echo "No new domains found, skipping commit."
             else
-              git commit -m "Auto-update rules with deep inspection"
-              git push "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:${{ github.ref_name }}
+              git commit -m "chore: 增量更新影视规则 $(date +'%Y-%m-%d %H:%M')"
+              git push
             fi
           else
-            echo "Error: MyVideo.list missing!"
+            echo "Error: MyVideo.list not generated!"
             exit 1
           fi
