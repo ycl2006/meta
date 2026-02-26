@@ -1,9 +1,9 @@
 payload:
-  - DOMAIN-KEYWORD,bdzybf22
   - DOMAIN-KEYWORD,10cong
   - DOMAIN-KEYWORD,360zy
   - DOMAIN-KEYWORD,360zyx
   - DOMAIN-KEYWORD,a0887
+  - DOMAIN-KEYWORD,bdzybf
   - DOMAIN-KEYWORD,bfikuncdn
   - DOMAIN-KEYWORD,bfllvip
   - DOMAIN-KEYWORD,bfvvs
@@ -40,6 +40,7 @@ payload:
   - DOMAIN-KEYWORD,jszy
   - DOMAIN-KEYWORD,lbv
   - DOMAIN-KEYWORD,lfthirtytwo
+  - DOMAIN-KEYWORD,lz-cdn
   - DOMAIN-KEYWORD,lz15uu
   - DOMAIN-KEYWORD,lzcdn
   - DOMAIN-KEYWORD,m3u
@@ -76,7 +77,6 @@ payload:
   - DOMAIN-SUFFIX,api.wujinapi.me
   - DOMAIN-SUFFIX,api.xinlangapi.com
   - DOMAIN-SUFFIX,api.zuidapi.com
-  - DOMAIN-SUFFIX,bdzybf22.com
   - DOMAIN-SUFFIX,caiji.dyttzyapi.com
   - DOMAIN-SUFFIX,cj.ffzyapi.com
   - DOMAIN-SUFFIX,cj.lziapi.com
