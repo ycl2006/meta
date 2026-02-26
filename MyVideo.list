@@ -1,4 +1,5 @@
 payload:
+  - DOMAIN-KEYWORD,05men
   - DOMAIN-KEYWORD,10cong
   - DOMAIN-KEYWORD,360zy
   - DOMAIN-KEYWORD,360zyx
@@ -13,7 +14,6 @@ payload:
   - DOMAIN-KEYWORD,cdnlz18
   - DOMAIN-KEYWORD,cdnlz21
   - DOMAIN-KEYWORD,cdnlz22
-  - DOMAIN-KEYWORD,cdnlz4
   - DOMAIN-KEYWORD,cdnlz7
   - DOMAIN-KEYWORD,ddbbffcdn
   - DOMAIN-KEYWORD,dytt-cine
@@ -96,6 +96,9 @@ payload:
   - DOMAIN-KEYWORD,ryplay7
   - DOMAIN-KEYWORD,tyyszywvod
   - DOMAIN-KEYWORD,tyyszywvod1
+  - DOMAIN-KEYWORD,ukubf3
+  - DOMAIN-KEYWORD,ukubf4
+  - DOMAIN-KEYWORD,ukubf5
   - DOMAIN-KEYWORD,vip
   - DOMAIN-KEYWORD,wangwangzyvod
   - DOMAIN-KEYWORD,wlcdn99
@@ -108,6 +111,7 @@ payload:
   - DOMAIN-KEYWORD,yzzy28-play
   - DOMAIN-KEYWORD,yzzy31-play
   - DOMAIN-KEYWORD,yzzy33-play
+  - DOMAIN-KEYWORD,yzzy34-play
   - DOMAIN-KEYWORD,yzzyvip-29
   - DOMAIN-KEYWORD,yzzyvip-32
   - DOMAIN-KEYWORD,zuidazym3u8
@@ -138,6 +142,7 @@ payload:
   - DOMAIN-SUFFIX,cdn.yzzy28-play.com
   - DOMAIN-SUFFIX,cdn.yzzy31-play.com
   - DOMAIN-SUFFIX,cdn.yzzy33-play.com
+  - DOMAIN-SUFFIX,cdn.yzzy34-play.com
   - DOMAIN-SUFFIX,cdn.yzzyvip-29.com
   - DOMAIN-SUFFIX,cdn.yzzyvip-32.com
   - DOMAIN-SUFFIX,cdn7.ryplay7.com
@@ -186,11 +191,13 @@ payload:
   - DOMAIN-SUFFIX,tyyszyapi.com
   - DOMAIN-SUFFIX,tyyszywvod.com
   - DOMAIN-SUFFIX,tyyszywvod1.com
+  - DOMAIN-SUFFIX,ukzy.ukubf3.com
+  - DOMAIN-SUFFIX,ukzy.ukubf4.com
+  - DOMAIN-SUFFIX,ukzyvod3.ukubf5.com
   - DOMAIN-SUFFIX,v.cdnlz13.com
   - DOMAIN-SUFFIX,v.cdnlz18.com
   - DOMAIN-SUFFIX,v.cdnlz21.com
   - DOMAIN-SUFFIX,v.cdnlz22.com
-  - DOMAIN-SUFFIX,v.cdnlz4.com
   - DOMAIN-SUFFIX,v.cdnlz7.com
   - DOMAIN-SUFFIX,v.fengbao8.com
   - DOMAIN-SUFFIX,v.gsuus.com
@@ -258,6 +265,7 @@ payload:
   - DOMAIN-SUFFIX,www.mdzyapi.com
   - DOMAIN-SUFFIX,www.moduzy.com
   - DOMAIN-SUFFIX,wwzy.tv
+  - DOMAIN-SUFFIX,wwzycdn.05men.com
   - DOMAIN-SUFFIX,yzzy.play-cdn10.com
   - DOMAIN-SUFFIX,yzzy.play-cdn11.com
   - DOMAIN-SUFFIX,yzzy.play-cdn12.com
