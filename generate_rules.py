@@ -6,9 +6,14 @@ import time
 import random
 from urllib.parse import urlparse
 
+# 获取当前脚本所在目录，确保在 GitHub Actions 环境下路径正确
+BASE_PATH = os.path.dirname(os.path.abspath(__file__))
+JSON_DB = os.path.join(BASE_PATH, 'db.json')
+OUTPUT_LIST = os.path.join(BASE_PATH, 'MyVideo.list')
+
 def get_deep_domains(api_url):
     """
-    通过三次带有随机参数的请求，模拟多路径嗅探，捕获动态 CDN 域名
+    通过三次随机请求捕获动态 CDN 域名
     """
     found_domains = set()
     found_keywords = set()
@@ -35,8 +40,8 @@ def get_deep_domains(api_url):
                         if domain and len(domain) > 3:
                             found_domains.add(domain)
                             
-                            # 提取前缀词根 (如 v12.qewbn.com -> v)
                             parts = domain.split('.')
+                            # 提取前缀词根 (如 v12.qewbn.com -> v)
                             if len(parts) >= 3:
                                 prefix = parts[0]
                                 if re.match(r'^[a-z]{1,4}\d+$', prefix):
@@ -49,39 +54,48 @@ def get_deep_domains(api_url):
                                 main_name = parts[-2]
                                 if len(main_name) > 4: 
                                     found_keywords.add(main_name)
-            
-            time.sleep(0.5)
+            time.sleep(0.3)
         except Exception as e:
-            print(f"      ⚠️ 第 {i+1} 次尝试失败: {e}")
+            print(f"      ⚠️ 探测失败: {e}")
             
     return found_domains, found_keywords
 
 def generate():
-    base_path = os.path.dirname(os.path.abspath(__file__))
-    json_path = os.path.join(base_path, 'db.json')
-    
-    if not os.path.exists(json_path):
-        print("❌ 找不到 db.json 文件")
+    if not os.path.exists(JSON_DB):
+        print("❌ 错误: 找不到 db.json 文件")
         return
 
-    with open(json_path, 'r', encoding='utf-8') as f:
+    # --- 1. 读取历史数据 (增量合并的核心) ---
+    all_domains = set()
+    all_keywords = {
+        "m3u8", "yyv", "cdnlz", "yzzy", "wwzy", "10cong", "bfzy", "jszy", "360zy", "360zyx"
+    } 
+    
+    if os.path.exists(OUTPUT_LIST):
+        print(f"📂 发现现有规则，正在读取历史记录进行增量合并...")
+        with open(OUTPUT_LIST, 'r', encoding='utf-8') as f:
+            for line in f:
+                # 兼容 Clash Rule Provider 格式提取内容
+                kw_match = re.search(r'DOMAIN-KEYWORD,([^,\s]+)', line)
+                sf_match = re.search(r'DOMAIN-SUFFIX,([^,\s]+)', line)
+                if kw_match: all_keywords.add(kw_match.group(1).strip())
+                if sf_match: all_domains.add(sf_match.group(1).strip())
+        print(f"📥 已载入历史: {len(all_keywords)} 关键词, {len(all_domains)} 域名")
+
+    # --- 2. 爬取新数据 ---
+    with open(JSON_DB, 'r', encoding='utf-8') as f:
         db = json.load(f)
 
-    all_domains = set()
-    # 初始关键词库
-    all_keywords = {
-        "m3u8", "index.m3u8", "yyv", "cdnlz", "yzzy", 
-        "wwzy", "10cong", "bfzy", "jszy", "360zy", "360zyx"
-    } 
-
-    print(f"🚀 开始深度扫描 {len(db.get('sites', []))} 个采集站 API...")
+    sites = db.get('sites', [])
+    print(f"🚀 开始增量扫描 {len(sites)} 个采集站...")
     
-    for site in db.get('sites', []):
+    for site in sites:
         api = site.get('api', '')
         if not api or not api.startswith('http'): continue
             
         print(f"🔎 正在探测: {site.get('name', '未知站')}")
         
+        # 将 API 自身的域名也加入直连
         api_host = urlparse(api).netloc.split(':')[0]
         if api_host: all_domains.add(api_host)
         
@@ -89,22 +103,24 @@ def generate():
         all_domains.update(domains)
         all_keywords.update(keywords)
 
-    # --- 核心修正：写入逻辑必须在 generate 函数内部，才能访问 all_keywords ---
-    with open('MyVideo.list', 'w', encoding='utf-8') as f:
+    # --- 3. 过滤与持久化 ---
+    # 过滤掉黑名单和无效词
+    exclude = ["com", "net", "org", "www", "cdn", "index", "html", "payload", "github"]
+    
+    final_keywords = sorted([k for k in all_keywords if k and len(k) > 1 and k not in exclude])
+    final_domains = sorted([d for d in all_domains if d and "." in d])
+
+    with open(OUTPUT_LIST, 'w', encoding='utf-8') as f:
         f.write("payload:\n")
+        print(f"✍️ 写入关键词 ({len(final_keywords)} 条)")
+        for kw in final_keywords:
+            f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
         
-        print("✍️ 正在写入关键词规则...")
-        for kw in sorted(list(all_keywords)):
-            # 过滤无效词
-            if kw and kw not in ["com", "net", "org", "www", "cdn"]:
-                f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
-        
-        print("✍️ 正在写入域名后缀规则...")
-        for d in sorted(list(all_domains)):
-            if d:
-                f.write(f"  - DOMAIN-SUFFIX,{d}\n")
+        print(f"✍️ 写入域名后缀 ({len(final_domains)} 条)")
+        for d in final_domains:
+            f.write(f"  - DOMAIN-SUFFIX,{d}\n")
             
-    print(f"✅ 生成完毕！捕获域名: {len(all_domains)}，提取词根: {len(all_keywords)}")
+    print(f"✅ 处理完成！总规模：域名 {len(final_domains)}，词根 {len(final_keywords)}")
 
 if __name__ == "__main__":
     generate()
