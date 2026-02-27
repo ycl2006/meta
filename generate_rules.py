@@ -40,7 +40,7 @@ def get_deep_domains(api_url):
                             if len(parts) >= 2:
                                 main_name = parts[-2]
                                 if len(main_name) > 4: found_keywords.add(main_name)
-            time.sleep(0.3)
+            time.sleep(random.uniform(0.5, 3.0))  # 每次随机0.5到3.0 秒
         except:
             continue
     return found_domains, found_keywords
