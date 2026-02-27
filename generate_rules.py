@@ -14,7 +14,7 @@ OUTPUT_LIST = os.path.join(BASE_PATH, 'MyVideo.list')
 def get_deep_domains(api_url):
     found_domains = set()
     found_keywords = set()
-    for i in range(3):
+    for i in range(5):
         try:
             timestamp = int(time.time())
             nonce = random.randint(100, 999)
@@ -40,7 +40,7 @@ def get_deep_domains(api_url):
                             if len(parts) >= 2:
                                 main_name = parts[-2]
                                 if len(main_name) > 4: found_keywords.add(main_name)
-            time.sleep(0.2)
+            time.sleep(0.3)
         except:
             continue
     return found_domains, found_keywords
