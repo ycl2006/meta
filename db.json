@@ -38,10 +38,13 @@
     { "key": "xinlang2", "name": "新浪HTTPS", "api": "https://api.xinlangapi.com/xinlangapi.php/provide/vod", "active": true },
     { "key": "yilingba2", "name": "1080JSON", "api": "https://api.1080zyku.com/inc/apijson.php", "active": true },
     { "key": "lezi2", "name": "乐子HTTP", "api": "http://cj.lziapi.com/api.php/provide/vod", "active": true },
-    { "key": "fantaiying", "name": "饭太硬-核心", "api": "https://api.fantaiying.com/api.php/provide/vod", "active": true },
+    { "key": "fty_core", "name": "饭太硬-核心", "api": "https://api.fantaiying.com/api.php/provide/vod", "active": true },
+    { "key": "fty_v8s", "name": "饭太硬-聚合V8", "api": "https://api.v8s.net/api.php/provide/vod", "active": true },
     { "key": "feimao_cj", "name": "肥猫-采集", "api": "https://api.feimao.tv/api.php/provide/vod", "active": true },
     { "key": "hccx_api", "name": "荷城茶秀-API", "api": "http://rihou.cc:88/api.php/provide/vod", "active": true },
     { "key": "xiaomi", "name": "小米资源", "api": "http://caiji.xiaomiapi.com/api.php/provide/vod", "active": true },
-    { "key": "qiqi", "name": "七七资源", "api": "https://api.sykj.site/api.php/provide/vod", "active": true }
+    { "key": "qiqi", "name": "七七资源", "api": "https://api.sykj.site/api.php/provide/vod", "active": true },
+    { "key": "duoduo", "name": "多多资源", "api": "https://cj.lziapi.com/api.php/provide/vod", "active": true },
+    { "key": "haokan", "name": "好看资源", "api": "https://api.haokanzy.com/api.php/provide/vod", "active": true }
   ]
 }
