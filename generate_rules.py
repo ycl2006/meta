@@ -50,52 +50,44 @@ def generate():
         print("❌ 错误: 找不到 db.json")
         return
 
-    # --- 1. 读取历史数据 ---
+    # --- 1. 读取历史数据并记录初始数量 ---
     all_domains, all_keywords = set(), {"m3u8", "yyv", "cdnlz", "yzzy", "wwzy", "10cong", "bfzy", "jszy", "360zy"}
     if os.path.exists(OUTPUT_LIST):
         with open(OUTPUT_LIST, 'r', encoding='utf-8') as f:
             content = f.read()
             all_keywords.update(re.findall(r'DOMAIN-KEYWORD,([^,\s]+)', content))
             all_domains.update(re.findall(r'DOMAIN-SUFFIX,([^,\s]+)', content))
-        print(f"📥 历史载入: {len(all_keywords)}关键词, {len(all_domains)}域名")
+    
+    # 记录初始数量用于对比
+    initial_kw_count = len(all_keywords)
+    initial_dm_count = len(all_domains)
+    print(f"📥 历史载入: 关键词 {initial_kw_count} / 域名 {initial_dm_count}")
 
-    # --- 2. 爬取新数据 (实时进度展示) ---
+    # --- 2. 爬取新数据 ---
     with open(JSON_DB, 'r', encoding='utf-8') as f:
         db = json.load(f)
     
     sites = db.get('sites', [])
     total = len(sites)
     print(f"🚀 开始扫描 {total} 个采集站...")
-    print("::group::🔍 点击展开详细探测日志") # GitHub Actions 日志折叠开始
+    print("::group::🔍 点击展开详细探测日志")
 
-    start_time = time.time()
     for i, site in enumerate(sites, 1):
         name = site.get('name', '未知站')
         api = site.get('api', '')
-        percent = (i / total) * 100
-        
-        # 实时打印进度
-        print(f"[{i}/{total}] {percent:>3.0f}% 正在探测: {name}")
+        print(f"[{i}/{total}] {(i/total)*100:>3.0f}% 正在探测: {name}")
         
         if api and api.startswith('http'):
             api_host = urlparse(api).netloc.split(':')[0]
             if api_host: all_domains.add(api_host)
-            
             domains, keywords = get_deep_domains(api)
-            if domains:
-                print(f"   ✅ 捕获新域名: {len(domains)} 个")
-                all_domains.update(domains)
-                all_keywords.update(keywords)
-            else:
-                print(f"   ⚠️ 未发现有效数据")
+            all_domains.update(domains)
+            all_keywords.update(keywords)
     
-    print("::endgroup::") # GitHub Actions 日志折叠结束
-    print(f"⏱️ 扫描耗时: {int(time.time() - start_time)}s")
+    print("::endgroup::")
 
     # --- 3. 终极去重逻辑 ---
     exclude = ["com", "net", "org", "www", "cdn", "index", "html", "payload", "github", "vip"]
-    
-    # 词根合并 play-cdn10 -> play-cdn
     processed_keywords = set()
     for k in all_keywords:
         if not k or len(k) <= 1 or k in exclude: continue
@@ -116,8 +108,17 @@ def generate():
         f.write("payload:\n")
         for kw in final_keywords: f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
         for d in sorted(final_domains): f.write(f"  - DOMAIN-SUFFIX,{d}\n")
-            
-    print(f"✅ 瘦身成功！最终规则: 关键词 {len(final_keywords)} / 域名 {len(final_domains)}")
+
+    # --- 5. 计算并显示增量统计 ---
+    added_kw = len(final_keywords) - initial_kw_count
+    added_dm = len(final_domains) - initial_dm_count
+    
+    print("\n" + "="*30)
+    print(f"📊 最终增量统计报告:")
+    print(f"✨ 新增关键词: {max(0, added_kw)} 条")
+    print(f"✨ 新增域名后缀: {max(0, added_dm)} 条")
+    print(f"总库规模: 关键词 {len(final_keywords)} / 域名 {len(final_domains)}")
+    print("="*30)
 
 if __name__ == "__main__":
     generate()
