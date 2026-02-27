@@ -45,7 +45,10 @@ jobs:
             if git diff --staged --quiet; then
               echo "No new domains found, skipping commit."
             else
-              git commit -m "chore: 增量更新影视规则 $(date +'%Y-%m-%d %H:%M')"
+              # 修改后的 Commit 命令，显式指定为北京时间
+              # 获取新增的行数（简单统计，仅供参考）
+              ADDED_LINES=$(git diff --staged MyVideo.list | grep "^+" | grep -v "+++" | wc -l)
+              TZ='Asia/Shanghai' git commit -m "🤖chore: 增量更新($ADDED_LINES条) $(date +'%Y-%m-%d %H:%M')"
               git push
             fi
           else
