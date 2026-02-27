@@ -27,7 +27,9 @@ jobs:
         run: pip install requests
 
       - name: Run script
-        # ⚠️ 请确保你的 Python 脚本文件名确实是 generate_rules.py
+        env:
+          PYTHONUNBUFFERED: 1 # 开启无缓冲模式，强制实时输出日志
+      # ⚠️ 请确保你的 Python 脚本文件名确实是 generate_rules.py  
         run: python generate_rules.py
 
       - name: Commit and Push
