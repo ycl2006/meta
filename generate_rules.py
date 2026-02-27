@@ -11,19 +11,32 @@ BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 JSON_DB = os.path.join(BASE_PATH, 'db.json')
 OUTPUT_LIST = os.path.join(BASE_PATH, 'MyVideo.list')
 
-def get_deep_domains(api_url):
+def get_deep_domains(api_url, site_name, existing_domains):
     found_domains = set()
     found_keywords = set()
-    for i in range(5):
+    new_discoveries = []
+    
+    # 增加一点随机性绕过基础防火墙
+    headers = {
+        'User-Agent': 'okhttp/4.9.0',
+        'Accept': 'application/json'
+    }
+
+    success = False
+    for i in range(3): # 尝试3次
         try:
             timestamp = int(time.time())
             nonce = random.randint(100, 999)
             target_url = f"{api_url}?ac=detail&pg=1&_t={timestamp}&_n={nonce}"
-            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'}
-            resp = requests.get(target_url, headers=headers, timeout=12)
+            
+            resp = requests.get(target_url, headers=headers, timeout=10)
             if resp.status_code == 200:
                 data = resp.json()
                 vod_list = data.get('list', [])
+                if not vod_list:
+                    continue
+                
+                success = True
                 for vod in vod_list:
                     play_url = vod.get('vod_play_url', '')
                     urls = re.findall(r'https?://[^\$,\s]+', play_url)
@@ -31,26 +44,37 @@ def get_deep_domains(api_url):
                         domain = urlparse(u).netloc.split(':')[0]
                         if domain and len(domain) > 3:
                             found_domains.add(domain)
+                            # 实时检查是否是新域名
+                            if domain not in existing_domains:
+                                new_discoveries.append(domain)
+                                existing_domains.add(domain) # 避免单次重复显示
+                            
+                            # 提取关键字逻辑
                             parts = domain.split('.')
                             if len(parts) >= 3:
                                 prefix = parts[0]
                                 if re.match(r'^[a-z]{1,4}\d+$', prefix):
-                                    keyword = re.sub(r'\d+', '', prefix)
-                                    if len(keyword) >= 2: found_keywords.add(keyword)
+                                    kw = re.sub(r'\d+', '', prefix)
+                                    if len(kw) >= 2: found_keywords.add(kw)
                             if len(parts) >= 2:
                                 main_name = parts[-2]
                                 if len(main_name) > 4: found_keywords.add(main_name)
-            time.sleep(random.uniform(0.5, 3.0))  # 每次随机0.5到3.0 秒
-        except:
+                break 
+            else:
+                print(f"   ⚠️  HTTP 错误: {resp.status_code}")
+        except Exception as e:
+            if i == 2: print(f"   ❌ 网络异常: {str(e)}")
             continue
-    return found_domains, found_keywords
+        time.sleep(1)
+
+    return success, found_domains, found_keywords, new_discoveries
 
 def generate():
     if not os.path.exists(JSON_DB):
         print("❌ 错误: 找不到 db.json")
         return
 
-    # --- 1. 读取历史数据并记录初始数量 ---
+    # --- 1. 读取历史数据 ---
     all_domains, all_keywords = set(), {"m3u8", "yyv", "cdnlz", "yzzy", "wwzy", "10cong", "bfzy", "jszy", "360zy"}
     if os.path.exists(OUTPUT_LIST):
         with open(OUTPUT_LIST, 'r', encoding='utf-8') as f:
@@ -58,10 +82,8 @@ def generate():
             all_keywords.update(re.findall(r'DOMAIN-KEYWORD,([^,\s]+)', content))
             all_domains.update(re.findall(r'DOMAIN-SUFFIX,([^,\s]+)', content))
     
-    # 记录初始数量用于对比
-    initial_kw_count = len(all_keywords)
     initial_dm_count = len(all_domains)
-    print(f"📥 历史载入: 关键词 {initial_kw_count} / 域名 {initial_dm_count}")
+    print(f"📥 历史载入: 域名库已有 {initial_dm_count} 条记录")
 
     # --- 2. 爬取新数据 ---
     with open(JSON_DB, 'r', encoding='utf-8') as f:
@@ -70,21 +92,32 @@ def generate():
     sites = db.get('sites', [])
     total = len(sites)
     print(f"🚀 开始扫描 {total} 个采集站...")
-    print("::group::🔍 点击展开详细探测日志")
 
     for i, site in enumerate(sites, 1):
         name = site.get('name', '未知站')
         api = site.get('api', '')
-        print(f"[{i}/{total}] {(i/total)*100:>3.0f}% 正在探测: {name}")
+        
+        # 实时显示探测状态
+        print(f"[{i}/{total}] 正在探测: {name} ", end="", flush=True)
         
         if api and api.startswith('http'):
+            # 记录接口主域名
             api_host = urlparse(api).netloc.split(':')[0]
             if api_host: all_domains.add(api_host)
-            domains, keywords = get_deep_domains(api)
-            all_domains.update(domains)
-            all_keywords.update(keywords)
-    
-    print("::endgroup::")
+            
+            # 深入探测
+            is_ok, domains, keywords, news = get_deep_domains(api, name, all_domains)
+            
+            if is_ok:
+                print(f"✅ [成功]")
+                if news:
+                    for d in news:
+                        print(f"   ✨ 发现新域名: {d}")
+                all_keywords.update(keywords)
+            else:
+                print(f"❌ [失败或无数据]")
+        else:
+            print(f"⏩ [跳过: 无效API]")
 
     # --- 3. 终极去重逻辑 ---
     exclude = ["com", "net", "org", "www", "cdn", "index", "html", "payload", "github", "vip"]
@@ -109,16 +142,13 @@ def generate():
         for kw in final_keywords: f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
         for d in sorted(final_domains): f.write(f"  - DOMAIN-SUFFIX,{d}\n")
 
-    # --- 5. 计算并显示增量统计 ---
-    added_kw = len(final_keywords) - initial_kw_count
+    # --- 5. 统计报告 ---
     added_dm = len(final_domains) - initial_dm_count
-    
-    print("\n" + "="*30)
-    print(f"📊 最终增量统计报告:")
-    print(f"✨ 新增关键词: {max(0, added_kw)} 条")
-    print(f"✨ 新增域名后缀: {max(0, added_dm)} 条")
-    print(f"总库规模: 关键词 {len(final_keywords)} / 域名 {len(final_domains)}")
-    print("="*30)
+    print("\n" + "="*40)
+    print(f"🎉 扫描任务完成!")
+    print(f"✨ 本次新收割域名: {max(0, added_dm)} 条")
+    print(f"📦 规则文件已更新: {OUTPUT_LIST}")
+    print("="*40)
 
 if __name__ == "__main__":
     generate()
