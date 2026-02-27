@@ -73,14 +73,20 @@ payload:
   - DOMAIN-KEYWORD,zuidazym3u
   - DOMAIN-SUFFIX,api.1080zyku.com
   - DOMAIN-SUFFIX,api.apibdzy.com
+  - DOMAIN-SUFFIX,api.fantaiying.com
+  - DOMAIN-SUFFIX,api.feimao.tv
   - DOMAIN-SUFFIX,api.ffzyapi.com
   - DOMAIN-SUFFIX,api.guangsuapi.com
+  - DOMAIN-SUFFIX,api.haokanzy.com
+  - DOMAIN-SUFFIX,api.sykj.site
   - DOMAIN-SUFFIX,api.ukuapi.com
+  - DOMAIN-SUFFIX,api.v8s.net
   - DOMAIN-SUFFIX,api.wujinapi.com
   - DOMAIN-SUFFIX,api.wujinapi.me
   - DOMAIN-SUFFIX,api.xinlangapi.com
   - DOMAIN-SUFFIX,api.zuidapi.com
   - DOMAIN-SUFFIX,caiji.dyttzyapi.com
+  - DOMAIN-SUFFIX,caiji.xiaomiapi.com
   - DOMAIN-SUFFIX,cj.ffzyapi.com
   - DOMAIN-SUFFIX,cj.lziapi.com
   - DOMAIN-SUFFIX,cj.rycjapi.com
@@ -92,6 +98,7 @@ payload:
   - DOMAIN-SUFFIX,lbapi9.com
   - DOMAIN-SUFFIX,lovedan.net
   - DOMAIN-SUFFIX,qewbn.com
+  - DOMAIN-SUFFIX,rihou.cc
   - DOMAIN-SUFFIX,tyyszy.com
   - DOMAIN-SUFFIX,tyyszyapi.com
   - DOMAIN-SUFFIX,wolongzyw.com
