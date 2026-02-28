@@ -19,6 +19,7 @@ payload:
   - DOMAIN-KEYWORD,dytt-movies
   - DOMAIN-KEYWORD,dytt-network
   - DOMAIN-KEYWORD,dytt-see
+  - DOMAIN-KEYWORD,dytt-tv
   - DOMAIN-KEYWORD,dytt-tvs
   - DOMAIN-KEYWORD,dytt-video
   - DOMAIN-KEYWORD,fengbao
