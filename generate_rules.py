@@ -23,7 +23,7 @@ def get_deep_domains(api_url, site_name, existing_domains):
     }
 
     success = False
-    for i in range(3): # 尝试3次
+    for i in range(5): # 尝试5次
         try:
             timestamp = int(time.time())
             nonce = random.randint(100, 999)
