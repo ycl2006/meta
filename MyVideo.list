@@ -93,6 +93,7 @@ payload:
   - DOMAIN-SUFFIX,cj.ffzyapi.com
   - DOMAIN-SUFFIX,cj.lziapi.com
   - DOMAIN-SUFFIX,cj.rycjapi.com
+  - DOMAIN-SUFFIX,collect.wolongzyw.com
   - DOMAIN-SUFFIX,ffzy1.tv
   - DOMAIN-SUFFIX,ffzy5.tv
   - DOMAIN-SUFFIX,hhzyapi.com
