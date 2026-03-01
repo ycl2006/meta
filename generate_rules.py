@@ -16,14 +16,13 @@ def get_deep_domains(api_url, site_name, existing_domains):
     found_keywords = set()
     new_discoveries = []
     
-    # 增加一点随机性绕过基础防火墙
     headers = {
         'User-Agent': 'okhttp/4.9.0',
         'Accept': 'application/json'
     }
 
     success = False
-    for i in range(5): # 尝试5次
+    for i in range(5):  # 尝试5次
         try:
             timestamp = int(time.time())
             nonce = random.randint(100, 999)
@@ -34,9 +33,12 @@ def get_deep_domains(api_url, site_name, existing_domains):
                 data = resp.json()
                 vod_list = data.get('list', [])
                 if not vod_list:
+                    # 如果列表为空，随机等待后进入下一次重试
+                    time.sleep(random.uniform(0.5, 3.0))
                     continue
                 
                 success = True
+                # --- 开始解析逻辑 ---
                 for vod in vod_list:
                     play_url = vod.get('vod_play_url', '')
                     urls = re.findall(r'https?://[^\$,\s]+', play_url)
@@ -47,7 +49,7 @@ def get_deep_domains(api_url, site_name, existing_domains):
                             # 实时检查是否是新域名
                             if domain not in existing_domains:
                                 new_discoveries.append(domain)
-                                existing_domains.add(domain) # 避免单次重复显示
+                                existing_domains.add(domain) 
                             
                             # 提取关键字逻辑
                             parts = domain.split('.')
@@ -59,13 +61,18 @@ def get_deep_domains(api_url, site_name, existing_domains):
                             if len(parts) >= 2:
                                 main_name = parts[-2]
                                 if len(main_name) > 4: found_keywords.add(main_name)
-                break 
+                
+                break  # 成功获取并解析后，跳出重试循环
             else:
-                print(f"   ⚠️  HTTP 错误: {resp.status_code}")
+                # 状态码不是200时的处理
+                if i == 2: print(f"    ⚠️  HTTP 错误: {resp.status_code}")
+                
         except Exception as e:
-            if i == 2: print(f"   ❌ 网络异常: {str(e)}")
-            continue
-        time.sleep(1)
+            if i == 2: print(f"    ❌ 网络异常: {str(e)}")
+        
+        # --- 核心修改：随机间隔逻辑 ---
+        if not success and i < 4:
+            time.sleep(random.uniform(0.5, 3.0))
 
     return success, found_domains, found_keywords, new_discoveries
 
@@ -79,6 +86,7 @@ def generate():
     if os.path.exists(OUTPUT_LIST):
         with open(OUTPUT_LIST, 'r', encoding='utf-8') as f:
             content = f.read()
+            # 兼容读取现有规则文件中的内容
             all_keywords.update(re.findall(r'DOMAIN-KEYWORD,([^,\s]+)', content))
             all_domains.update(re.findall(r'DOMAIN-SUFFIX,([^,\s]+)', content))
     
@@ -97,7 +105,6 @@ def generate():
         name = site.get('name', '未知站')
         api = site.get('api', '')
         
-        # 实时显示探测状态
         print(f"[{i}/{total}] 正在探测: {name} ", end="", flush=True)
         
         if api and api.startswith('http'):
@@ -112,41 +119,47 @@ def generate():
                 print(f"✅ [成功]")
                 if news:
                     for d in news:
-                        print(f"   ✨ 发现新域名: {d}")
+                        print(f"    ✨ 发现新域名: {d}")
                 all_keywords.update(keywords)
             else:
                 print(f"❌ [失败或无数据]")
         else:
             print(f"⏩ [跳过: 无效API]")
 
-    # --- 3. 终极去重逻辑 ---
+    # --- 3. 终极去重与清洗逻辑 ---
     exclude = ["com", "net", "org", "www", "cdn", "index", "html", "payload", "github", "vip"]
     processed_keywords = set()
     for k in all_keywords:
         if not k or len(k) <= 1 or k in exclude: continue
+        # 去掉结尾数字（例如 cdn123 -> cdn）
         base = re.sub(r'\d+$', '', k)
         processed_keywords.add(base if len(base) > 2 else k)
 
     final_keywords = sorted(list(processed_keywords))
-    final_domains = []
+    
+    # 域名去重：如果一个域名包含在关键词里，或者它是另一个更长域名的后缀，进行简化
+    final_domains_set = set()
     sorted_raw_domains = sorted(list(all_domains), key=len)
     for d in sorted_raw_domains:
         if not d or "." not in d: continue
+        # 如果域名已经包含在关键词规则里，就不再单独添加后缀规则
         if not any(kw in d for kw in final_keywords):
-            if not any(d.endswith("." + x) for x in final_domains):
-                final_domains.append(d)
+            final_domains_set.add(d)
 
-    # --- 4. 写入文件 ---
+    # --- 4. 写入文件 (Clash 格式) ---
     with open(OUTPUT_LIST, 'w', encoding='utf-8') as f:
         f.write("payload:\n")
-        for kw in final_keywords: f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
-        for d in sorted(final_domains): f.write(f"  - DOMAIN-SUFFIX,{d}\n")
+        for kw in final_keywords:
+            f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
+        for d in sorted(list(final_domains_set)):
+            f.write(f"  - DOMAIN-SUFFIX,{d}\n")
 
     # --- 5. 统计报告 ---
-    added_dm = len(final_domains) - initial_dm_count
+    current_dm_count = len(final_domains_set)
+    added_dm = current_dm_count - initial_dm_count
     print("\n" + "="*40)
     print(f"🎉 扫描任务完成!")
-    print(f"✨ 本次新收割域名: {max(0, added_dm)} 条")
+    print(f"✨ 本次新增加域名后缀: {max(0, added_dm)} 条")
     print(f"📦 规则文件已更新: {OUTPUT_LIST}")
     print("="*40)
 
