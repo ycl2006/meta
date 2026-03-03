@@ -75,6 +75,7 @@ payload:
   - DOMAIN-KEYWORD,yzzy5-play
   - DOMAIN-KEYWORD,yzzyvip-
   - DOMAIN-KEYWORD,zuidazym3u
+  - DOMAIN-SUFFIX,198016.xyz
   - DOMAIN-SUFFIX,api.1080zyku.com
   - DOMAIN-SUFFIX,api.apibdzy.com
   - DOMAIN-SUFFIX,api.fantaiying.com
@@ -112,4 +113,3 @@ payload:
   - DOMAIN-SUFFIX,www.huyaapi.com
   - DOMAIN-SUFFIX,www.mdzyapi.com
   - DOMAIN-SUFFIX,www.moduzy.com
-  - DOMAIN-SUFFIX,198016.xyz
