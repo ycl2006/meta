@@ -4,22 +4,22 @@ on:
   schedule:
     # 北京时间：08:00, 16:00, 00:00 (对应 UTC: 00, 08, 16)
     - cron: '0 0,8,16 * * *' 
-  workflow_dispatch: # 保留手动触发，方便随时调试
+  workflow_dispatch: # 保留手动触发
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # 必须赋予写入权限，否则 push 会失败
+      contents: write 
       
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4 # 升级到 v4
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 拉取所有历史记录，确保 git diff 准确
+          fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5 # 升级到 v5
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
@@ -28,30 +28,45 @@ jobs:
 
       - name: Run script
         env:
-          PYTHONUNBUFFERED: 1 # 开启无缓冲模式，强制实时输出日志
-      # ⚠️ 请确保你的 Python 脚本文件名确实是 generate_rules.py  
+          PYTHONUNBUFFERED: 1
         run: python generate_rules.py
+
+      - name: Convert List to YAML
+        run: |
+          # 检查脚本输出，如果是 MyVideo.list 则转换为 MyVideo.yml
+          if [ -f MyVideo.list ]; then
+            echo "payload:" > MyVideo.yml
+            sed 's/^/  - /' MyVideo.list >> MyVideo.yml
+            echo "Successfully converted MyVideo.list to MyVideo.yml"
+          elif [ -f MyVideo.yml ]; then
+            echo "MyVideo.yml already exists, checking format..."
+            # 如果脚本已经输出了 yml 但没带 payload 头，可以在这里补处理
+          else
+            echo "No rule file found!"
+            exit 1
+          fi
 
       - name: Commit and Push
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # 检查文件是否存在
-          if [ -f MyVideo.list ]; then
-            git add MyVideo.list
+          # 检查生成的 yml 文件
+          if [ -f MyVideo.yml ]; then
+            git add MyVideo.yml
+            # 同时删除旧的 list 文件（如果有的话），保持仓库干净
+            git rm MyVideo.list --ignore-unmatch
             
-            # 只有在文件内容真正发生变化时才提交
+            # 只有在内容真正变化时才提交
             if git diff --staged --quiet; then
-              echo "No new domains found, skipping commit."
+              echo "No changes in MyVideo.yml, skipping commit."
             else
-              # 修改后的 Commit 命令，显式指定为北京时间
-              # 获取新增的行数（简单统计，仅供参考）
-              ADDED_LINES=$(git diff --staged MyVideo.list | grep "^+" | grep -v "+++" | wc -l)
-              TZ='Asia/Shanghai' git commit -m "🤖chore: 增量更新($ADDED_LINES条) $(date +'%Y-%m-%d %H:%M')"
+              # 统计新增行数（排除第一行 payload:）
+              ADDED_LINES=$(($(git diff --staged MyVideo.yml | grep "^+" | grep -v "+++" | wc -l) - 1))
+              TZ='Asia/Shanghai' git commit -m "🤖chore: 自动更新YML规则($ADDED_LINES条) $(date +'%Y-%m-%d %H:%M')"
               git push
             fi
           else
-            echo "Error: MyVideo.list not generated!"
+            echo "Error: MyVideo.yml not generated!"
             exit 1
           fi
