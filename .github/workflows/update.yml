@@ -2,9 +2,9 @@ name: Update Video Rules
 
 on:
   schedule:
-    # 北京时间：08:00, 16:00, 00:00 (对应 UTC: 00, 08, 16)
+    # 北京时间：08:00, 16:00, 00:00
     - cron: '0 0,8,16 * * *' 
-  workflow_dispatch: # 保留手动触发
+  workflow_dispatch: 
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -31,19 +31,29 @@ jobs:
           PYTHONUNBUFFERED: 1
         run: python generate_rules.py
 
-      - name: Convert List to YAML
+      - name: Fix and Clean YAML Format
         run: |
-          # 核心转换逻辑：先清理可能存在的旧 yml，确保重新生成
-          rm -f MyVideo.yml
-          if [ -f MyVideo.list ]; then
-            echo "payload:" > MyVideo.yml
-            # 1. grep -v 过滤掉原文件里可能存在的 payload 声明
-            # 2. sed 去掉行首已有的空格或横杠，确保每行是干净的域名格式
-            # 3. 统一加上标准的 '  - ' 前缀
-            grep -v "payload" MyVideo.list | sed 's/^[[:space:]-]*//' | sed 's/^/  - /' >> MyVideo.yml
-            echo "Successfully converted MyVideo.list to MyVideo.yml"
+          # 如果脚本生成了 yml，我们对其进行格式清洗
+          if [ -f MyVideo.yml ]; then
+            echo "Cleaning MyVideo.yml format..."
+            
+            # 1. 提取所有包含 DOMAIN 的行 (这是规则的核心)
+            # 2. 清理行首所有的空格、横杠、以及可能存在的 payload: 关键字
+            # 3. sort -u 自动去重并排序，保持文件整洁
+            RAW_DATA=$(grep "DOMAIN" MyVideo.yml | sed 's/^[[:space:]-]*//' | sed 's/payload://g' | sort -u)
+            
+            # 4. 重新构建标准 YAML 结构
+            echo "payload:" > MyVideo.tmp
+            if [ -n "$RAW_DATA" ]; then
+                echo "$RAW_DATA" | sed 's/^/  - /' >> MyVideo.tmp
+            fi
+            
+            # 5. 覆盖原文件
+            mv MyVideo.tmp MyVideo.yml
+            echo "Format fixed. Content summary:"
+            head -n 5 MyVideo.yml
           else
-            echo "Error: MyVideo.list not found!"
+            echo "Error: MyVideo.yml not found! Check your Python script output."
             exit 1
           fi
 
@@ -52,7 +62,7 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # 强制清理旧的 .list 文件，避免冲突
+          # 强制移除可能残留的旧 list 文件，不纠结它是否存在
           git rm -f MyVideo.list --ignore-unmatch
           
           if [ -f MyVideo.yml ]; then
@@ -61,14 +71,9 @@ jobs:
             if git diff --staged --quiet; then
               echo "No changes in MyVideo.yml, skipping commit."
             else
-              # 统计新增行数
-              RAW_COUNT=$(git diff --staged MyVideo.yml | grep "^+" | grep -v "+++" | wc -l)
-              ADDED_LINES=$((RAW_COUNT > 0 ? RAW_COUNT - 1 : 0))
-              
-              TZ='Asia/Shanghai' git commit -m "🤖chore: 自动更新YML规则($ADDED_LINES条) $(date +'%Y-%m-%d %H:%M')"
+              # 统计有效域名条数
+              COUNT=$(grep -c "DOMAIN" MyVideo.yml)
+              TZ='Asia/Shanghai' git commit -m "🤖chore: 规则重构更新($COUNT条) $(date +'%Y-%m-%d %H:%M')"
               git push
             fi
-          else
-            echo "Error: MyVideo.yml was not generated!"
-            exit 1
           fi
