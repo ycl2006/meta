@@ -33,17 +33,13 @@ jobs:
 
       - name: Convert List to YAML
         run: |
-          # 检查脚本输出，如果是 MyVideo.list 则转换为 MyVideo.yml
+          # 核心转换逻辑：将 .list 转换为带 payload 头和横杠格式的 .yml
           if [ -f MyVideo.list ]; then
             echo "payload:" > MyVideo.yml
             sed 's/^/  - /' MyVideo.list >> MyVideo.yml
             echo "Successfully converted MyVideo.list to MyVideo.yml"
-          elif [ -f MyVideo.yml ]; then
-            echo "MyVideo.yml already exists, checking format..."
-            # 如果脚本已经输出了 yml 但没带 payload 头，可以在这里补处理
           else
-            echo "No rule file found!"
-            exit 1
+            echo "Warning: MyVideo.list not found, checking if MyVideo.yml already exists..."
           fi
 
       - name: Commit and Push
@@ -51,22 +47,26 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # 检查生成的 yml 文件
+          # 1. 强制清理旧的 .list 文件，解决 local modifications 报错
+          # 使用 -f 强制删除并忽略不存在的情况
+          git rm -f MyVideo.list --ignore-unmatch
+          
+          # 2. 检查并添加新的 .yml 文件
           if [ -f MyVideo.yml ]; then
             git add MyVideo.yml
-            # 同时删除旧的 list 文件（如果有的话），保持仓库干净
-            git rm MyVideo.list --ignore-unmatch
             
-            # 只有在内容真正变化时才提交
+            # 3. 只有在内容真正变化时才提交
             if git diff --staged --quiet; then
               echo "No changes in MyVideo.yml, skipping commit."
             else
-              # 统计新增行数（排除第一行 payload:）
-              ADDED_LINES=$(($(git diff --staged MyVideo.yml | grep "^+" | grep -v "+++" | wc -l) - 1))
+              # 统计新增行数（减去第一行的 payload:）
+              RAW_COUNT=$(git diff --staged MyVideo.yml | grep "^+" | grep -v "+++" | wc -l)
+              ADDED_LINES=$((RAW_COUNT > 0 ? RAW_COUNT - 1 : 0))
+              
               TZ='Asia/Shanghai' git commit -m "🤖chore: 自动更新YML规则($ADDED_LINES条) $(date +'%Y-%m-%d %H:%M')"
               git push
             fi
           else
-            echo "Error: MyVideo.yml not generated!"
+            echo "Error: MyVideo.yml was not generated!"
             exit 1
           fi
