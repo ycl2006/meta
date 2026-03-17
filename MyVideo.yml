@@ -9,8 +9,11 @@ payload:
   - DOMAIN-KEYWORD,bvvvvvvv7f
   - DOMAIN-KEYWORD,bvvvvvvvvv1f
   - DOMAIN-KEYWORD,cdnlz
+  - DOMAIN-KEYWORD,cdnlz13
+  - DOMAIN-KEYWORD,cdnlz18
   - DOMAIN-KEYWORD,cdnlz21
   - DOMAIN-KEYWORD,cdnlz22
+  - DOMAIN-KEYWORD,cdnlz7
   - DOMAIN-KEYWORD,ddbbffcdn
   - DOMAIN-KEYWORD,dytt-cine
   - DOMAIN-KEYWORD,dytt-cinema
@@ -53,8 +56,12 @@ payload:
   - DOMAIN-KEYWORD,lbsl2026
   - DOMAIN-KEYWORD,lbv325627
   - DOMAIN-KEYWORD,lfthirtytwo
+  - DOMAIN-KEYWORD,lz-cdn11
+  - DOMAIN-KEYWORD,lz-cdn12
+  - DOMAIN-KEYWORD,lz-cdn13
   - DOMAIN-KEYWORD,lz15uu
   - DOMAIN-KEYWORD,lzcdn
+  - DOMAIN-KEYWORD,lzcdn23
   - DOMAIN-KEYWORD,lzcdn27
   - DOMAIN-KEYWORD,lzcdn28
   - DOMAIN-KEYWORD,lzcdn31
@@ -62,6 +69,11 @@ payload:
   - DOMAIN-KEYWORD,m3u8
   - DOMAIN-KEYWORD,modujx
   - DOMAIN-KEYWORD,modujx11
+  - DOMAIN-KEYWORD,modujx12
+  - DOMAIN-KEYWORD,modujx13
+  - DOMAIN-KEYWORD,modujx14
+  - DOMAIN-KEYWORD,modujx15
+  - DOMAIN-KEYWORD,modujx16
   - DOMAIN-KEYWORD,phimgood
   - DOMAIN-KEYWORD,play-cdn
   - DOMAIN-KEYWORD,play-cdn10
@@ -85,9 +97,12 @@ payload:
   - DOMAIN-KEYWORD,rrcdnbf5
   - DOMAIN-KEYWORD,rrcdnbf6
   - DOMAIN-KEYWORD,ryiplay
+  - DOMAIN-KEYWORD,ryiplay18
+  - DOMAIN-KEYWORD,ryiplay19
   - DOMAIN-KEYWORD,ryplay
   - DOMAIN-KEYWORD,ryplay11
   - DOMAIN-KEYWORD,ryplay12
+  - DOMAIN-KEYWORD,ryplay14
   - DOMAIN-KEYWORD,ryplay16
   - DOMAIN-KEYWORD,ryplay17
   - DOMAIN-KEYWORD,tyyszywvod
