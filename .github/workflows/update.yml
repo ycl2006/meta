@@ -31,40 +31,16 @@ jobs:
           PYTHONUNBUFFERED: 1
         run: python generate_rules.py
 
-      - name: Fix and Clean YAML Format
-        run: |
-          # 检查脚本生成的 yml 并清洗格式
-          if [ -f MyVideo.yml ]; then
-            echo "Cleaning MyVideo.yml format..."
-            
-            # 提取核心域名规则并去重
-            RAW_DATA=$(grep "DOMAIN" MyVideo.yml | sed 's/^[[:space:]-]*//' | sed 's/payload://g' | sort -u)
-            
-            # 构建标准格式
-            echo "payload:" > MyVideo.tmp
-            if [ -n "$RAW_DATA" ]; then
-                echo "$RAW_DATA" | sed 's/^/  - /' >> MyVideo.tmp
-            fi
-            
-            mv MyVideo.tmp MyVideo.yml
-            echo "Format fixed. Content head:"
-            head -n 5 MyVideo.yml
-          else
-            echo "Error: MyVideo.yml not found!"
-            exit 1
-          fi
-
       - name: Commit and Push
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # 强制清理旧的 list
-          git rm -f MyVideo.list --ignore-unmatch
-          
+          # 检查文件是否存在
           if [ -f MyVideo.yml ]; then
             git add MyVideo.yml
             
+            # 只有在内容有变动时才提交
             if git diff --staged --quiet; then
               echo "No changes in MyVideo.yml, skipping commit."
             else
@@ -72,4 +48,7 @@ jobs:
               TZ='Asia/Shanghai' git commit -m "🤖chore: 规则重构更新($COUNT条) $(date +'%Y-%m-%d %H:%M')"
               git push
             fi
+          else
+            echo "Error: MyVideo.yml was not generated!"
+            exit 1
           fi
