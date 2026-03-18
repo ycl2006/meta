@@ -25,6 +25,7 @@ payload:
   - DOMAIN-KEYWORD,dytt-kan
   - DOMAIN-KEYWORD,dytt-luck
   - DOMAIN-KEYWORD,dytt-network
+  - DOMAIN-KEYWORD,dytt-tv
   - DOMAIN-KEYWORD,dytt-tvs
   - DOMAIN-KEYWORD,fengbao
   - DOMAIN-KEYWORD,fengbao8
@@ -97,6 +98,7 @@ payload:
   - DOMAIN-KEYWORD,play-cdn18
   - DOMAIN-KEYWORD,play-cdn19
   - DOMAIN-KEYWORD,play-cdn2
+  - DOMAIN-KEYWORD,play-cdn4
   - DOMAIN-KEYWORD,play-cdn6
   - DOMAIN-KEYWORD,play-cdn7
   - DOMAIN-KEYWORD,play-cdn8
@@ -124,6 +126,7 @@ payload:
   - DOMAIN-KEYWORD,ukubf3
   - DOMAIN-KEYWORD,ukubf4
   - DOMAIN-KEYWORD,ukubf5
+  - DOMAIN-KEYWORD,ukubf8
   - DOMAIN-KEYWORD,wangwangzyvod
   - DOMAIN-KEYWORD,wlcdn
   - DOMAIN-KEYWORD,wlcdn99
@@ -137,6 +140,7 @@ payload:
   - DOMAIN-KEYWORD,yzzy31-play
   - DOMAIN-KEYWORD,yzzy33-play
   - DOMAIN-KEYWORD,yzzy34-play
+  - DOMAIN-KEYWORD,yzzy5-play
   - DOMAIN-KEYWORD,yzzyvip-
   - DOMAIN-KEYWORD,yzzyvip-29
   - DOMAIN-KEYWORD,yzzyvip-32
