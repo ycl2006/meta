@@ -20,12 +20,14 @@ payload:
   - DOMAIN-KEYWORD,cdnlz4
   - DOMAIN-KEYWORD,cdnlz7
   - DOMAIN-KEYWORD,ddbbffcdn
+  - DOMAIN-KEYWORD,dytt-broadcast
   - DOMAIN-KEYWORD,dytt-cine
   - DOMAIN-KEYWORD,dytt-cinema
   - DOMAIN-KEYWORD,dytt-hot
   - DOMAIN-KEYWORD,dytt-kan
   - DOMAIN-KEYWORD,dytt-luck
   - DOMAIN-KEYWORD,dytt-network
+  - DOMAIN-KEYWORD,dytt-see
   - DOMAIN-KEYWORD,dytt-tv
   - DOMAIN-KEYWORD,dytt-tvs
   - DOMAIN-KEYWORD,fengbao
