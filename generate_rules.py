@@ -136,15 +136,21 @@ def generate():
             continue
         final_domains.add(d_clean)
 
-    # --- 4. 生成标准 YAML Payload ---
-    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-        f.write("payload:\n")
-        # 写入关键词规则（使用标准英文半角空格）
-        for kw in sorted(list(final_keywords)):
-            f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
-        # 写入域名后缀规则
-        for d in sorted(list(final_domains)):
-            f.write(f"  - DOMAIN-SUFFIX,{d}\n")
+    # --- 4. 生成标准 YAML Payload (修复缩进与空格) ---
+    try:
+        with open(OUTPUT_FILE, 'w', encoding='utf-8', newline='\n') as f:
+            f.write("payload:\n")
+            # 必须使用 2 个标准的英文半角空格进行缩进
+            for kw in sorted(list(final_keywords)):
+                if kw.strip():
+                    f.write(f"  - DOMAIN-KEYWORD,{kw.strip()}\n")
+            
+            for d in sorted(list(final_domains)):
+                if d.strip():
+                    f.write(f"  - DOMAIN-SUFFIX,{d.strip()}\n")
+        print(f"🎉 规范文件已存至: {OUTPUT_FILE}")
+    except Exception as e:
+        print(f"❌ 写入文件失败: {e}")
 
     print("\n" + "="*40)
     print(f"🎉 任务完成! 最终规则总数: {len(final_keywords) + len(final_domains)}")
