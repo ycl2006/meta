@@ -9,7 +9,7 @@ from urllib.parse import urlparse
 # 路径配置
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 JSON_DB = os.path.join(BASE_PATH, 'db.json')
-# 统一文件名与 Workflow 一致
+# 统一输出文件名
 OUTPUT_FILE = os.path.join(BASE_PATH, 'MyVideo.yml')
 
 def get_deep_domains(api_url, site_name, existing_domains):
@@ -23,7 +23,7 @@ def get_deep_domains(api_url, site_name, existing_domains):
     }
 
     success = False
-    for i in range(3):  # 尝试3次，减少由于单个站卡顿导致的整体超时
+    for i in range(3):  # 尝试3次，应对采集站偶尔的卡顿
         try:
             timestamp = int(time.time())
             nonce = random.randint(100, 999)
@@ -40,7 +40,7 @@ def get_deep_domains(api_url, site_name, existing_domains):
                 success = True
                 for vod in vod_list:
                     play_url = vod.get('vod_play_url', '')
-                    # 匹配标准的 URL
+                    # 匹配标准的 URL 地址
                     urls = re.findall(r'https?://[^\$,\s]+', play_url)
                     for u in urls:
                         domain = urlparse(u).netloc.split(':')[0]
@@ -50,16 +50,17 @@ def get_deep_domains(api_url, site_name, existing_domains):
                                 existing_domains.add(domain)
                             found_domains.add(domain)
                             
-                            # 关键字提取优化
+                            # 关键字提取优化：取主域名部分
                             parts = domain.split('.')
                             if len(parts) >= 2:
                                 main_name = parts[-2]
-                                if len(main_name) > 4: 
+                                # 只有长度大于4的才认为是有效特征词，防止抓到 com/net 等
+                                if len(main_name) > 4:  
                                     found_keywords.add(main_name)
                 break 
             
         except Exception as e:
-            if i == 2: print(f"    ❌ 网络异常: {str(e)}")
+            if i == 2: print(f"    ❌ 网络异常 ({site_name}): {str(e)}")
         
         if not success and i < 2:
             time.sleep(random.uniform(0.5, 2.0))
@@ -68,25 +69,24 @@ def get_deep_domains(api_url, site_name, existing_domains):
 
 def generate():
     if not os.path.exists(JSON_DB):
-        print("❌ 错误: 找不到 db.json")
+        print(f"❌ 错误: 找不到数据库文件 {JSON_DB}")
         return
 
-    # --- 1. 读取历史数据 ---
+    # --- 1. 初始化规则库 ---
     all_domains = set()
-    # 默认保底关键字
+    # 基础保底关键字（你最常用的那些）
     all_keywords = {"m3u8", "yyv", "cdnlz", "yzzy", "wwzy", "10cong", "bfzy", "jszy", "360zy"}
     
+    # 如果已有旧文件，先读取进来做增量更新
     if os.path.exists(OUTPUT_FILE):
         with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
             content = f.read()
-            # 改进正则，兼容 Clash 格式提取
             all_keywords.update(re.findall(r'DOMAIN-KEYWORD,([^,\s\n]+)', content))
             all_domains.update(re.findall(r'DOMAIN-SUFFIX,([^,\s\n]+)', content))
     
-    initial_count = len(all_domains) + len(all_keywords)
-    print(f"📥 历史载入: 规则库已有 {initial_count} 条记录")
+    print(f"📥 历史载入: 规则库已有 {len(all_domains) + len(all_keywords)} 条记录")
 
-    # --- 2. 爬取新数据 ---
+    # --- 2. 解析 db.json 并扫描 ---
     try:
         with open(JSON_DB, 'r', encoding='utf-8') as f:
             db = json.load(f)
@@ -96,7 +96,7 @@ def generate():
     
     sites = db.get('sites', [])
     total = len(sites)
-    print(f"🚀 开始扫描 {total} 个采集站...")
+    print(f"🚀 开始探测 {total} 个采集站...")
 
     for i, site in enumerate(sites, 1):
         name = site.get('name', '未知站')
@@ -105,52 +105,50 @@ def generate():
         print(f"[{i}/{total}] 正在探测: {name} ", end="", flush=True)
         
         if api and api.startswith('http'):
-            # 接口域名
             api_host = urlparse(api).netloc.split(':')[0]
             if api_host: all_domains.add(api_host)
             
-            # 深入探测
             is_ok, domains, keywords, news = get_deep_domains(api, name, all_domains)
-            
             if is_ok:
-                print(f"✅ [发现新域名: {len(news)}]")
+                print(f"✅ [新增: {len(news)}]")
                 all_keywords.update(keywords)
             else:
-                print(f"❌ [超时或格式错误]")
+                print(f"❌ [连接失败]")
         else:
-            print(f"⏩ [跳过: 无效API]")
+            print(f"⏩ [跳过]")
 
-    # --- 3. 清洗与去重 ---
-    exclude = ["com", "net", "org", "www", "cdn", "index", "html", "github", "vip", "cloud"]
+    # --- 3. 核心清洗与去重逻辑 ---
+    # 排除掉常见的非特征字符
+    exclude_list = {"com", "net", "org", "www", "cdn", "index", "html", "github", "vip", "cloud", "video", "api"}
     
-    # 关键字清洗
     final_keywords = set()
     for k in all_keywords:
         k_clean = k.lower().strip()
-        if len(k_clean) > 2 and k_clean not in exclude:
+        if len(k_clean) > 2 and k_clean not in exclude_list:
             final_keywords.add(k_clean)
 
-    # 域名清洗：如果域名已经包含在关键词中，则不再单独添加后缀规则
     final_domains = set()
     for d in all_domains:
         d_clean = d.lower().strip()
         if not d_clean or "." not in d_clean: continue
-        # 如果域名中包含任何一个关键词，跳过（简化规则）
+        # 💡 优化：如果域名已被关键词覆盖，则不再重复添加后缀规则，精简 YML 体积
         if any(kw in d_clean for kw in final_keywords):
             continue
         final_domains.add(d_clean)
 
-    # --- 4. 写入文件 ---
+    # --- 4. 生成标准 YAML Payload ---
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
         f.write("payload:\n")
+        # 写入关键词规则（使用标准英文半角空格）
         for kw in sorted(list(final_keywords)):
             f.write(f"  - DOMAIN-KEYWORD,{kw}\n")
+        # 写入域名后缀规则
         for d in sorted(list(final_domains)):
             f.write(f"  - DOMAIN-SUFFIX,{d}\n")
 
     print("\n" + "="*40)
-    print(f"🎉 任务完成! 现有规则总数: {len(final_keywords) + len(final_domains)}")
-    print(f"📦 文件已保存至: {OUTPUT_FILE}")
+    print(f"🎉 任务完成! 最终规则总数: {len(final_keywords) + len(final_domains)}")
+    print(f"📦 规范文件已存至: {OUTPUT_FILE}")
     print("="*40)
 
 if __name__ == "__main__":
