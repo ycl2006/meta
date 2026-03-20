@@ -52,3 +52,17 @@ jobs:
             echo "Error: MyVideo.yml was not generated!"
             exit 1
           fi
+# --- 新增：清理旧记录的任务 ---
+  cleanup:
+    runs-on: ubuntu-latest
+    needs: build  # 等更新规则跑完再清理
+    permissions:
+      actions: write # 需要删除权限
+    steps:
+      - name: Delete old workflow runs
+        uses: Mattraider/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 0
+          keep_minimum_runs: 5
