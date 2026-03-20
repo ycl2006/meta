@@ -35,18 +35,25 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          if [ -f MyVideo.yml ]; then
-            git add MyVideo.yml
+          # 检查新生成的 .list 文件是否存在
+          if [ -f MyVideo.list ]; then
+            git add MyVideo.list
+            
+            # 如果以前有旧的 .yml，可以顺便删掉它，保持仓库整洁
+            if [ -f MyVideo.yml ]; then
+              git rm MyVideo.yml
+            fi
             
             if git diff --staged --quiet; then
-              echo "No changes in MyVideo.yml, skipping commit."
+              echo "No changes in MyVideo.list, skipping commit."
             else
-              COUNT=$(grep -c "DOMAIN" MyVideo.yml)
+              # 统计新格式下的规则数量
+              COUNT=$(grep -c "DOMAIN" MyVideo.list)
               TZ='Asia/Shanghai' git commit -m "🤖chore: 规则重构更新($COUNT条) $(date +'%Y-%m-%d %H:%M')"
               git push
             fi
           else
-            echo "Error: MyVideo.yml was not generated!"
+            echo "Error: MyVideo.list was not generated!"
             exit 1
           fi
 
@@ -62,12 +69,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
         run: |
-          # 获取除了最新的 5 个以外的所有运行记录 ID
-          # 增加判断，防止 run_ids 为空时循环报错
           run_ids=$(gh run list --repo "$REPO" --limit 100 --json databaseId --jq '.[5:] | map(.databaseId) | .[]' 2>/dev/null || echo "")
           
           if [ -z "$run_ids" ]; then
-            echo "没有多余的运行记录需要清理（当前记录 <= 5 条）。"
+            echo "没有多余的运行记录需要清理。"
           else
             for id in $run_ids; do
               echo "正在删除运行记录: $id"
