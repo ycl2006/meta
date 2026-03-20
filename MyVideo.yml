@@ -181,6 +181,7 @@ payload:
   - DOMAIN-SUFFIX,jyzyapi.com
   - DOMAIN-SUFFIX,lbapi9.com
   - DOMAIN-SUFFIX,lovedan.net
+  - DOMAIN-SUFFIX,qewbn.com
   - DOMAIN-SUFFIX,tyyszy.com
   - DOMAIN-SUFFIX,tyyszyapi.com
   - DOMAIN-SUFFIX,wolongzyw.com
@@ -188,4 +189,3 @@ payload:
   - DOMAIN-SUFFIX,www.huyaapi.com
   - DOMAIN-SUFFIX,www.mdzyapi.com
   - DOMAIN-SUFFIX,www.moduzy.com
-  - DOMAIN-SUFFIX,qewbn.com
