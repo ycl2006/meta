@@ -7,176 +7,170 @@ import random
 from urllib.parse import urlparse
 
 # =============================
-# 📁 配置区（请确保路径正确）
+# 📁 路径配置（根据你的 GitHub 仓库结构调整）
 # =============================
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 JSON_DB = os.path.join(BASE_PATH, 'db.json')
-OUTPUT_FILE = os.path.join(BASE_PATH, 'MyVideo.list')  # 统一使用 .list 格式
+# 确保后缀是 .yml，匹配你的 OpenClash 配置
+OUTPUT_FILE = os.path.join(BASE_PATH, 'MyVideo.yml') 
 
-# 模拟浏览器头，防止被 API 拦截
+# 模拟浏览器 User-Agent，防止被影视站 API 屏蔽
 HEADERS = {
-    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
     'Accept': 'application/json'
 }
 
 # =============================
-# 🔍 核心逻辑组件
+# 🔍 工具函数
 # =============================
 
 def get_root_domain(domain):
-    """提取根域名，例如 a.b.com -> b.com"""
+    """提取根域名，例如 v1.api.m3u8.com -> m3u8.com"""
     if not domain or "." not in domain:
         return domain
     parts = domain.split('.')
     return ".".join(parts[-2:]) if len(parts) >= 2 else domain
 
-def extract_urls_from_text(text):
-    """从杂乱文本中嗅探所有 URL"""
+def extract_urls(text):
+    """从文本中提取所有 https? 链接"""
     if not text: return set()
-    # 匹配 http/https 开头的非空字符，直到遇到分隔符
     return set(re.findall(r'https?://[^\$,\s\x22\x27]+', text))
 
 # =============================
-# 📡 深度采集器（带重试与错误捕获）
+# 📡 深度采集模块
 # =============================
-def fetch_site_domains(api_url, domain_counter):
+
+def fetch_domains_from_api(api_url, domain_counter):
+    """访问 API 并抓取播放地址中的域名"""
     found_domains = set()
     found_keywords = set()
     
-    # 尝试不同页面增加样本多样性
-    for attempt in range(3):
+    # 随机取一页，增加数据多样性
+    for _ in range(3): 
         try:
-            target_page = random.randint(1, 20)
-            target_url = f"{api_url}?ac=detail&pg={target_page}"
+            page = random.randint(1, 15)
+            target_url = f"{api_url}?ac=detail&pg={page}"
+            resp = requests.get(target_url, headers=HEADERS, timeout=10)
             
-            response = requests.get(target_url, headers=HEADERS, timeout=12)
-            if response.status_code != 200:
-                continue
+            if resp.status_code != 200: continue
             
-            data = response.json()
+            data = resp.json()
             vod_list = data.get('list', [])
-            if not vod_list:
-                continue
+            if not vod_list: continue
 
             for vod in vod_list:
-                # 拼接所有可能包含域名的字段
-                raw_content = f"{vod.get('vod_play_url','')}|{vod.get('vod_play_from','')}"
-                urls = extract_urls_from_text(raw_content)
+                # 提取播放链接和来源标签
+                raw_text = f"{vod.get('vod_play_url','')}|{vod.get('vod_play_from','')}"
+                urls = extract_urls(raw_text)
                 
                 for u in urls:
                     domain = urlparse(u).netloc.split(':')[0].lower()
-                    if not domain or "." not in domain:
-                        continue
+                    if not domain or "." not in domain: continue
                     
                     root = get_root_domain(domain)
-                    # 权重系统：记录域名出现的频率
+                    # 权重统计：每发现一次加 1 分
                     domain_counter[domain] = domain_counter.get(domain, 0) + 1
                     domain_counter[root] = domain_counter.get(root, 0) + 1
                     
                     found_domains.add(domain)
                     found_domains.add(root)
                     
-                    # 提取关键词（用于泛匹配）
-                    keyword = root.split('.')[0]
-                    if len(keyword) > 3:
-                        found_keywords.add(keyword)
+                    # 提取关键词
+                    kw = root.split('.')[0]
+                    if len(kw) > 3: found_keywords.add(kw)
             
-            # 只要成功抓到一页就跳出，减轻 API 压力
             return True, found_domains, found_keywords
-            
-        except Exception as e:
-            # 静默处理单个 API 错误
+        except:
             continue
-            
     return False, set(), set()
 
 # =============================
 # 🚀 主生成流程
 # =============================
-def main():
-    print("--- 🎬 开始执行规则生成程序 ---")
+
+def generate():
+    print("--- 🚀 开始生成 MyVideo.yml 规则 ---")
     
     if not os.path.exists(JSON_DB):
-        print(f"❌ 错误: 找不到数据库文件 {JSON_DB}")
+        print(f"❌ 错误: 找不到 {JSON_DB}")
         return
 
     all_domains = set()
     all_keywords = {"m3u8", "cdnlz", "yzzy", "bfzy", "jszy", "360zy", "ffzy", "lzzy"}
     domain_counter = {}
 
-    # 1. 继承旧规则权重（如果有）
+    # 1. 增量继承：读取现有的 yml 文件，保持规则稳定性
     if os.path.exists(OUTPUT_FILE):
-        print(f"📥 正在读取现有规则以维持稳定性...")
+        print("📥 正在读取旧规则以继承权重...")
         try:
             with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
                 content = f.read()
-                # 提取存量域名
-                old_ds = re.findall(r'DOMAIN(?:-SUFFIX)?,\s*([^,\s\n]+)', content)
-                for d in old_ds:
+                # 提取旧规则中的域名
+                existing = re.findall(r'DOMAIN(?:-SUFFIX)?,\s*([^,\s\n]+)', content)
+                for d in existing:
                     d = d.lower().strip()
                     all_domains.add(d)
-                    domain_counter[d] = domain_counter.get(d, 0) + 5 # 给存量规则极高权重
-        except:
-            pass
+                    domain_counter[d] = domain_counter.get(d, 0) + 3 # 存量规则权重加成
+        except Exception as e:
+            print(f"⚠️ 读取旧文件跳过: {e}")
 
-    # 2. 读取站点并采集
-    try:
-        with open(JSON_DB, 'r', encoding='utf-8') as f:
-            db_data = json.load(f)
-            sites = db_data.get('sites', [])
-    except Exception as e:
-        print(f"❌ JSON 解析失败: {e}")
-        return
+    # 2. 读取数据库并爬取
+    with open(JSON_DB, 'r', encoding='utf-8') as f:
+        db = json.load(f)
+    
+    sites = db.get('sites', [])
+    print(f"📡 准备扫描 {len(sites)} 个接口...")
 
-    print(f"📡 准备扫描 {len(sites)} 个影视接口...")
     for i, site in enumerate(sites, 1):
-        name = site.get('name', 'Unknown')
+        name = site.get('name', '未知')
         api = site.get('api', '')
-        
-        print(f"[{i:02d}/{len(sites)}] 正在嗅探: {name.ljust(10)} ", end="", flush=True)
+        print(f"[{i:02d}] 正在处理: {name.ljust(10)} ", end="", flush=True)
         
         if api.startswith("http"):
-            success, domains, kws = fetch_site_domains(api, domain_counter)
-            if success:
-                all_domains.update(domains)
-                all_keywords.update(kws)
-                print("✅ Done")
+            ok, ds, ks = fetch_domains_from_api(api, domain_counter)
+            if ok:
+                all_domains.update(ds)
+                all_keywords.update(ks)
+                print("✅")
             else:
-                print("⚠️ Skip")
+                print("❌")
         else:
-            print("⏩ Null")
+            print("⏩")
 
-    # 3. 智能清洗与过滤
-    # 只有出现次数超过 1 次（或者是根域名）才保留，防止脏数据
+    # 3. 智能清洗：过滤掉低频杂质域名
     final_domains = set()
     for d in all_domains:
+        # 根域名直接保留，子域名需出现 2 次以上才入选
         if d.count('.') == 1 or domain_counter.get(d, 0) >= 2:
             final_domains.add(d)
 
-    # 排除常见的非视频 CDN 或 API 关键词
-    blacklist_kw = {"static", "api", "player", "image", "script", "style", "css", "js"}
-    final_keywords = {k for k in all_keywords if k not in blacklist_kw and len(k) > 3}
+    # 过滤掉一些常见的干扰词
+    blacklist = {"static", "api", "player", "image", "script", "style", "ts", "index"}
+    final_keywords = {k for k in all_keywords if k not in blacklist and len(k) > 3}
 
-    # 4. 写入文件（LIST 格式）
-    print(f"📝 正在整理并写入 {OUTPUT_FILE}...")
+    # 4. 严格按照 YAML 格式写入
+    print(f"📝 正在写入 YAML 文件...")
     try:
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-            # 按类型排序写入
-            # A. 精确子域名
+            f.write("payload:\n")
+            
+            # 先写精确域名
             for d in sorted(list(final_domains)):
                 if d.count('.') >= 2:
-                    f.write(f"DOMAIN,{d}\n")
-            # B. 核心根域名（后缀匹配）
+                    f.write(f"  - DOMAIN,{d}\n")
+            
+            # 再写后缀匹配（最核心的部分）
             for d in sorted(list(final_domains)):
                 if d.count('.') == 1:
-                    f.write(f"DOMAIN-SUFFIX,{d}\n")
-            # C. 关键词泛匹配
+                    f.write(f"  - DOMAIN-SUFFIX,{d}\n")
+            
+            # 最后写关键词
             for k in sorted(list(final_keywords)):
-                f.write(f"DOMAIN-KEYWORD,{k}\n")
+                f.write(f"  - DOMAIN-KEYWORD,{k}\n")
                 
-        print(f"🎉 任务圆满完成！共生成 {len(final_domains)} 条域名规则。")
+        print(f"🎉 任务完成！文件保存至: {OUTPUT_FILE}")
     except Exception as e:
-        print(f"❌ 写入文件失败: {e}")
+        print(f"❌ 写入失败: {e}")
 
 if __name__ == "__main__":
-    main()
+    generate()
