@@ -1,18 +1,17 @@
-name: Update Video Rules
+name: Update Video Rules (PROD)
 
 on:
   schedule:
-    # 北京时间：08:00, 16:00, 00:00
-    - cron: '0 0,8,16 * * *' 
-  workflow_dispatch: 
+    - cron: '0 0,8,16 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write 
+      contents: write
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -35,43 +34,36 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
+          # 核心修复：实时计算 DOMAIN 行数
           if [ -f MyVideo.yml ]; then
+            COUNT=$(grep -c "DOMAIN" MyVideo.yml || echo "0")
             git add MyVideo.yml
             
+            # 只有文件内容真正变化时才 Commit
             if git diff --staged --quiet; then
-              echo "No changes in MyVideo.yml, skipping commit."
+              echo "No changes, skipping commit."
             else
-              COUNT=$(grep -c "DOMAIN" MyVideo.yml)
-              TZ='Asia/Shanghai' git commit -m "🤖chore: 规则重构更新($COUNT条) $(date +'%Y-%m-%d %H:%M')"
+              # 构建 Commit 消息
+              TIME=$(TZ='Asia/Shanghai' date +'%m-%d %H:%M')
+              MSG="🤖chore: 规则重构更新(${COUNT}条) $TIME"
+              echo "Creating commit: $MSG"
+              git commit -m "$MSG"
               git push
             fi
-          else
-            echo "Error: MyVideo.yml was not generated!"
-            exit 1
           fi
 
-  # --- 使用 GitHub 原生命令清理记录 ---
+  # 定期清理历史记录，保持仓库整洁
   cleanup:
     runs-on: ubuntu-latest
     needs: build
     permissions:
       actions: write
     steps:
-      - name: Delete old runs using GitHub CLI
+      - name: Delete old runs
         env:
           GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
         run: |
-          # 获取除了最新的 5 个以外的所有运行记录 ID
-          # 增加判断，防止 run_ids 为空时循环报错
-          run_ids=$(gh run list --repo "$REPO" --limit 100 --json databaseId --jq '.[5:] | map(.databaseId) | .[]' 2>/dev/null || echo "")
-          
-          if [ -z "$run_ids" ]; then
-            echo "没有多余的运行记录需要清理（当前记录 <= 5 条）。"
-          else
-            for id in $run_ids; do
-              echo "正在删除运行记录: $id"
-              gh run delete --repo "$REPO" "$id"
-            done
-            echo "清理完成！"
+          run_ids=$(gh run list --limit 100 --json databaseId --jq '.[10:] | map(.databaseId) | .[]' 2>/dev/null || echo "")
+          if [ ! -z "$run_ids" ]; then
+            for id in $run_ids; do gh run delete "$id"; done
           fi
