@@ -225,29 +225,30 @@ def generate():
             final_keywords.add(k)
 
     # =============================
-    # 📝 输出（稳定命中结构）
+    # 📝 输出（LIST 格式：适配 SubConverter/ACL4SSR）
     # =============================
-    with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-        f.write("payload:\n")
-
-        # 🎯 精确
+    # 将输出文件名从 .yml 改为 .list
+    LIST_OUTPUT_FILE = OUTPUT_FILE.replace('.yml', '.list')
+    
+    with open(LIST_OUTPUT_FILE, 'w', encoding='utf-8') as f:
+        # 🎯 精确匹配
         for d in sorted(final_domains):
             if d.count('.') >= 2:
-                f.write(f"  - DOMAIN,{d}\n")
+                f.write(f"DOMAIN,{d}\n")
 
-        # 🔥 核心（最重要）
+        # 🔥 核心：后缀匹配（最常用）
         for d in sorted(final_domains):
             if d.count('.') == 1:
-                f.write(f"  - DOMAIN-SUFFIX,{d}\n")
+                f.write(f"DOMAIN-SUFFIX,{d}\n")
 
-        # 🧠 泛匹配
+        # 🧠 关键词泛匹配
         for k in sorted(final_keywords):
-            f.write(f"  - DOMAIN-KEYWORD,{k}\n")
+            f.write(f"DOMAIN-KEYWORD,{k}\n")
 
-    print("\n🎉 完成")
-    print(f"🌐 域名: {len(final_domains)}")
-    print(f"🧠 关键词: {len(final_keywords)}")
-
+    print("\n🎉 完成转换")
+    print(f"📄 文件已保存为: {os.path.basename(LIST_OUTPUT_FILE)}")
+    print(f"🌐 域名数量: {len(final_domains)}")
+    print(f"🧠 关键词数量: {len(final_keywords)}")
 
 if __name__ == "__main__":
     generate()
