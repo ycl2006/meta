@@ -34,7 +34,7 @@ def get_deep_domains(api_url, site_name, existing_domains):
                 data = resp.json()
                 vod_list = data.get('list', [])
                 if not vod_list:
-                    time.sleep(random.uniform(0.5, 5.0))
+                    time.sleep(random.uniform(0.5, 1.5))
                     continue
                 
                 success = True
@@ -63,7 +63,7 @@ def get_deep_domains(api_url, site_name, existing_domains):
             if i == 2: print(f"    ❌ 网络异常 ({site_name}): {str(e)}")
         
         if not success and i < 2:
-            time.sleep(random.uniform(0.5, 2.0))
+            time.sleep(random.uniform(0.5, 4.0))
 
     return success, found_domains, found_keywords, new_discoveries
 
