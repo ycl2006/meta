@@ -10,6 +10,34 @@ BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 JSON_DB = os.path.join(BASE_PATH, 'db.json')
 OUTPUT_FILE = os.path.join(BASE_PATH, 'MyVideo.yml')
 
+
+def extract_urls(text):
+    """🔥 提取所有URL（含嵌套 / 解码 / m3u8）"""
+    urls = set()
+
+    if not text:
+        return urls
+
+    # 基础URL
+    base_urls = re.findall(r'https?://[^\s\$,"]+', text)
+    urls.update(base_urls)
+
+    # 🔥 解码嵌套URL（关键）
+    for u in list(base_urls):
+        try:
+            decoded = requests.utils.unquote(u)
+            nested = re.findall(r'https?://[^\s\$,"]+', decoded)
+            urls.update(nested)
+        except:
+            pass
+
+    # 🔥 强抓 m3u8
+    m3u8_urls = re.findall(r'https?://[^\s]+\.m3u8', text)
+    urls.update(m3u8_urls)
+
+    return urls
+
+
 def get_deep_domains(api_url, site_name, existing_domains):
     found_domains = set()
     found_keywords = set()
@@ -26,11 +54,11 @@ def get_deep_domains(api_url, site_name, existing_domains):
         try:
             timestamp = int(time.time())
             nonce = random.randint(100, 999)
-            page = random.randint(1, 5)  # ✅ 随机页提升覆盖率
+            page = random.randint(1, 8)  # 🔥 更深扫描
 
-            target_url = f"{api_url}?ac=detail&pg={page}&_t={timestamp}&_n={nonce}"
+            url = f"{api_url}?ac=detail&pg={page}&_t={timestamp}&_n={nonce}"
 
-            resp = requests.get(target_url, headers=headers, timeout=10)
+            resp = requests.get(url, headers=headers, timeout=10)
 
             if resp.status_code == 200:
                 data = resp.json()
@@ -43,9 +71,15 @@ def get_deep_domains(api_url, site_name, existing_domains):
                 success = True
 
                 for vod in vod_list:
-                    play_url = vod.get('vod_play_url', '')
+                    # 🔥 多字段合并抓取
+                    raw_text = " ".join([
+                        vod.get('vod_play_url', ''),
+                        vod.get('vod_down_url', ''),
+                        vod.get('vod_play_from', ''),
+                        json.dumps(vod, ensure_ascii=False)  # 🔥 全字段兜底
+                    ])
 
-                    urls = re.findall(r'https?://[^\$,\s]+', play_url)
+                    urls = extract_urls(raw_text)
 
                     for u in urls:
                         domain = urlparse(u).netloc.split(':')[0]
@@ -57,19 +91,20 @@ def get_deep_domains(api_url, site_name, existing_domains):
 
                             found_domains.add(domain)
 
-                            # ✅ 提取主域名关键词
+                            # 🔥 提取主域关键词
                             parts = domain.split('.')
                             if len(parts) >= 2:
-                                main_name = parts[-2].lower()
+                                main = parts[-2].lower()
 
                                 bad_keywords = {
                                     "static", "player", "stream", "media",
                                     "video", "cache", "play", "download",
-                                    "file", "cdn", "api", "data"
+                                    "file", "cdn", "api", "data", "img",
+                                    "js", "css"
                                 }
 
-                                if len(main_name) > 4 and main_name not in bad_keywords:
-                                    found_keywords.add(main_name)
+                                if len(main) > 4 and main not in bad_keywords:
+                                    found_keywords.add(main)
 
                 break
 
@@ -86,22 +121,19 @@ def get_deep_domains(api_url, site_name, existing_domains):
 
 def generate():
     if not os.path.exists(JSON_DB):
-        print(f"❌ 找不到数据库文件: {JSON_DB}")
+        print(f"❌ 找不到 db.json")
         return
 
     all_domains = set()
-    all_keywords = {"m3u8", "yyv", "cdnlz", "yzzy", "wwzy", "10cong", "bfzy", "jszy", "360zy"}
 
-    # ✅ 读取旧规则（增量更新）
-    if os.path.exists(OUTPUT_FILE):
-        with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
-            content = f.read()
-            all_keywords.update(re.findall(r'DOMAIN-KEYWORD,([^,\s\n]+)', content))
-            all_domains.update(re.findall(r'DOMAIN-SUFFIX,([^,\s\n]+)', content))
+    # 🔥 核心保底关键词
+    all_keywords = {
+        "m3u8", "yyv", "cdnlz", "yzzy",
+        "wwzy", "bfzy", "jszy", "360zy"
+    }
 
-    print(f"📥 历史规则: {len(all_domains) + len(all_keywords)} 条")
+    print("🚀 开始全量扫描...")
 
-    # 读取 db.json
     try:
         with open(JSON_DB, 'r', encoding='utf-8') as f:
             db = json.load(f)
@@ -110,33 +142,30 @@ def generate():
         return
 
     sites = db.get('sites', [])
-    total = len(sites)
-
-    print(f"🚀 开始扫描 {total} 个站点...")
 
     for i, site in enumerate(sites, 1):
         name = site.get('name', '未知')
         api = site.get('api', '')
 
-        print(f"[{i}/{total}] {name} ", end="", flush=True)
+        print(f"[{i}/{len(sites)}] {name} ", end="", flush=True)
 
         if api.startswith("http"):
-            api_host = urlparse(api).netloc.split(':')[0]
-            if api_host:
-                all_domains.add(api_host)
+            host = urlparse(api).netloc.split(':')[0]
+            if host:
+                all_domains.add(host)
 
-            is_ok, domains, keywords, news = get_deep_domains(api, name, all_domains)
+            ok, domains, keywords, news = get_deep_domains(api, name, all_domains)
 
-            if is_ok:
+            if ok:
                 print(f"✅ +{len(news)}")
                 all_keywords.update(keywords)
             else:
-                print("❌ 失败")
+                print("❌")
         else:
-            print("⏩ 跳过")
+            print("⏩")
 
     # =============================
-    # ✅ 清洗规则
+    # 🔥 清洗规则
     # =============================
 
     exclude_list = {
@@ -153,26 +182,27 @@ def generate():
     final_domains = set()
     for d in all_domains:
         d = d.lower().strip()
+
         if not d or "." not in d:
             continue
 
-        main_part = d.split('.')[-2]
+        main = d.split('.')[-2]
 
-        # ✅ 只在完全匹配关键词才跳过（防误杀）
-        if main_part in final_keywords:
+        # 🔥 防误杀（仅完全匹配才跳过）
+        if main in final_keywords:
             continue
 
         final_domains.add(d)
 
     # =============================
-    # ✅ 生成 YAML（优化版）
+    # 🔥 输出 YAML
     # =============================
 
     try:
         with open(OUTPUT_FILE, 'w', encoding='utf-8', newline='\n') as f:
             f.write("payload:\n")
 
-            # 🎯 精确匹配（优先）
+            # 精确匹配
             for d in sorted(final_domains):
                 f.write(f"  - DOMAIN,{d}\n")
 
