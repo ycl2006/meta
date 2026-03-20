@@ -1,5 +1,4 @@
 payload:
-  - DOMAIN,lbv325627.com
   - DOMAIN,1080p.huyall.com
   - DOMAIN,13.lzdow1314.top
   - DOMAIN,14.lzdow1314.top
@@ -202,6 +201,7 @@ payload:
   - DOMAIN,www.mdzyapi.com
   - DOMAIN,www.moduzy.com
   - DOMAIN,www.moduzytuuu.com
+  - DOMAIN,wwzycdn.10cong.com
   - DOMAIN,yzzy.play-cdn10.com
   - DOMAIN,yzzy.play-cdn11.com
   - DOMAIN,yzzy.play-cdn12.com
@@ -220,6 +220,7 @@ payload:
   - DOMAIN,yzzy1.play-cdn16.com
   - DOMAIN,yzzy21.playback-speed.com
   - DOMAIN-SUFFIX,1080zyku.com
+  - DOMAIN-SUFFIX,10cong.com
   - DOMAIN-SUFFIX,360zyx.vip
   - DOMAIN-SUFFIX,a0887.icu
   - DOMAIN-SUFFIX,apibdzy.com
@@ -314,6 +315,7 @@ payload:
   - DOMAIN-SUFFIX,jyzyapi.com
   - DOMAIN-SUFFIX,lbapi9.com
   - DOMAIN-SUFFIX,lbsl2026.com
+  - DOMAIN-SUFFIX,lbv325627.com
   - DOMAIN-SUFFIX,lefhao20250923.top
   - DOMAIN-SUFFIX,lfthirtytwo.com
   - DOMAIN-SUFFIX,liangzipic.com
@@ -405,6 +407,7 @@ payload:
   - DOMAIN-SUFFIX,ukubf5.com
   - DOMAIN-SUFFIX,ukubf8.com
   - DOMAIN-SUFFIX,viptulz.com
+  - DOMAIN-SUFFIX,wangwangzyimg.com
   - DOMAIN-SUFFIX,wangwangzyimg1.com
   - DOMAIN-SUFFIX,wangwangzyvod.com
   - DOMAIN-SUFFIX,wlcdn99.com
