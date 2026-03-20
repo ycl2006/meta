@@ -23,7 +23,7 @@ def get_deep_domains(api_url, site_name, existing_domains):
     }
 
     success = False
-    for i in range(3):  # 尝试3次，应对采集站偶尔的卡顿
+    for i in range(6):  # 尝试6次，应对采集站偶尔的卡顿
         try:
             timestamp = int(time.time())
             nonce = random.randint(100, 999)
@@ -34,7 +34,7 @@ def get_deep_domains(api_url, site_name, existing_domains):
                 data = resp.json()
                 vod_list = data.get('list', [])
                 if not vod_list:
-                    time.sleep(random.uniform(0.5, 1.5))
+                    time.sleep(random.uniform(0.5, 5.0))
                     continue
                 
                 success = True
