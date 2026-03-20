@@ -50,18 +50,19 @@ jobs:
             exit 1
           fi
 
-  # --- 修复后的清理任务 ---
+  # --- 使用 GitHub 原生命令清理记录 ---
   cleanup:
     runs-on: ubuntu-latest
     needs: build
     permissions:
-      actions: write  # 必须开启 actions 写入权限才能删除记录
+      actions: write
     steps:
-      - name: Delete workflow runs
-        # 注意：此处 M 必须大写
-        uses: Mattraider/delete-workflow-runs@v2
-        with:
-          token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          retain_days: 0
-          keep_minimum_runs: 5
+      - name: Delete old runs using GitHub CLI
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # 获取除了最新的 5 个以外的所有运行记录 ID 并删除
+          run_ids=$(gh run list --limit 100 --json databaseId  --jq '.[5:].[].databaseId')
+          for id in $run_ids; do
+            gh run delete "$id"
+          done
