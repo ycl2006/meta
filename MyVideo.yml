@@ -1,4 +1,36 @@
 payload:
+  - DOMAIN,api.1080zyku.com
+  - DOMAIN,api.apibdzy.com
+  - DOMAIN,api.ffzyapi.com
+  - DOMAIN,api.guangsuapi.com
+  - DOMAIN,api.ukuapi.com
+  - DOMAIN,api.wujinapi.com
+  - DOMAIN,api.wujinapi.me
+  - DOMAIN,api.xinlangapi.com
+  - DOMAIN,api.zuidapi.com
+  - DOMAIN,app.bfzyapi.com
+  - DOMAIN,bfzyapi.com
+  - DOMAIN,caiji.dyttzyapi.com
+  - DOMAIN,cj.ffzyapi.com
+  - DOMAIN,cj.lziapi.com
+  - DOMAIN,cj.rycjapi.com
+  - DOMAIN,collect.wolongzyw.com
+  - DOMAIN,ffzy1.tv
+  - DOMAIN,ffzy5.tv
+  - DOMAIN,hhzyapi.com
+  - DOMAIN,ikunzyapi.com
+  - DOMAIN,jszyapi.com
+  - DOMAIN,jyzyapi.com
+  - DOMAIN,lbapi9.com
+  - DOMAIN,lovedan.net
+  - DOMAIN,qewbn.com
+  - DOMAIN,tyyszy.com
+  - DOMAIN,tyyszyapi.com
+  - DOMAIN,wolongzyw.com
+  - DOMAIN,www.hongniuzy2.com
+  - DOMAIN,www.huyaapi.com
+  - DOMAIN,www.mdzyapi.com
+  - DOMAIN,www.moduzy.com
   - DOMAIN-KEYWORD,10cong
   - DOMAIN-KEYWORD,360zy
   - DOMAIN-KEYWORD,360zyx
@@ -38,6 +70,7 @@ payload:
   - DOMAIN-KEYWORD,fengbao9
   - DOMAIN-KEYWORD,ffzy-online
   - DOMAIN-KEYWORD,ffzy-online1
+  - DOMAIN-KEYWORD,ffzy-online2
   - DOMAIN-KEYWORD,ffzy-online3
   - DOMAIN-KEYWORD,ffzy-online4
   - DOMAIN-KEYWORD,ffzy-online5
@@ -47,6 +80,7 @@ payload:
   - DOMAIN-KEYWORD,ffzy-play2
   - DOMAIN-KEYWORD,ffzy-play5
   - DOMAIN-KEYWORD,ffzy-play6
+  - DOMAIN-KEYWORD,ffzy-play9
   - DOMAIN-KEYWORD,ffzy-plays
   - DOMAIN-KEYWORD,ffzy-video
   - DOMAIN-KEYWORD,ffzyread
@@ -169,6 +203,8 @@ payload:
   - DOMAIN-SUFFIX,api.wujinapi.me
   - DOMAIN-SUFFIX,api.xinlangapi.com
   - DOMAIN-SUFFIX,api.zuidapi.com
+  - DOMAIN-SUFFIX,app.bfzyapi.com
+  - DOMAIN-SUFFIX,bfzyapi.com
   - DOMAIN-SUFFIX,caiji.dyttzyapi.com
   - DOMAIN-SUFFIX,cj.ffzyapi.com
   - DOMAIN-SUFFIX,cj.lziapi.com
@@ -178,6 +214,7 @@ payload:
   - DOMAIN-SUFFIX,ffzy5.tv
   - DOMAIN-SUFFIX,hhzyapi.com
   - DOMAIN-SUFFIX,ikunzyapi.com
+  - DOMAIN-SUFFIX,jszyapi.com
   - DOMAIN-SUFFIX,jyzyapi.com
   - DOMAIN-SUFFIX,lbapi9.com
   - DOMAIN-SUFFIX,lovedan.net
