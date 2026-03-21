@@ -59,17 +59,18 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # 1. 显式指定仓库获取 ID 列表
-          # 2. 这里的 jq 逻辑：获取所有 ID，跳过最近的 5 个（保留 5 个）
-          run_ids=$(gh run list -R ${{ github.repository }} --limit 50 --json databaseId --jq '.[5:].databaseId' | tr -d '[],"')
+          # 获取运行记录的 ID 列表，每行一个 ID
+          # --limit 50 表示获取最近 50 条
+          # tail -n +6 表示跳过前 5 条（即保留最近的 5 条记录）
+          run_ids=$(gh run list -R ${{ github.repository }} --limit 50 --json databaseId --template '{{range .}}{{ .databaseId }}{{"\n"}}{{end}}' | tail -n +6)
 
-          if [ ! -z "$run_ids" ] && [ "$run_ids" != "null" ]; then
-            echo "发现旧记录，准备清理..."
+          if [ ! -z "$run_ids" ]; then
+            echo "正在清理旧的运行记录..."
             for id in $run_ids; do
-              # 使用内置的 delete 命令，比直接调 API 更不容易出错
-              gh run delete -R ${{ github.repository }} $id
+              # 显式指定仓库删除
+              gh run delete -R ${{ github.repository }} "$id"
             done
             echo "清理完成。"
           else
-            echo "没有需要清理的旧记录。"
+            echo "没有需要清理的旧记录（当前记录少于 5 条）。"
           fi
