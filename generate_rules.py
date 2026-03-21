@@ -121,7 +121,7 @@ def generate():
     print(f"📝 写入更新至 {OUTPUT_FILE}...")
     try:
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-            f.write("payload:\n")
+            f.write("rules:\n")
             # 排序确保 Git Diff 最小化
             sorted_ds = sorted(list(final_domains))
             # 先写子域名精确匹配
