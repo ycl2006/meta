@@ -63,7 +63,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          run_ids=$(gh run list --limit 100 --json databaseId --jq '.[10:] | map(.databaseId) | .[]' 2>/dev/null || echo "")
+          run_ids=$(gh run list --limit 5 --json databaseId --jq '.[10:] | map(.databaseId) | .[]' 2>/dev/null || echo "")
           if [ ! -z "$run_ids" ]; then
             for id in $run_ids; do gh run delete "$id"; done
           fi
