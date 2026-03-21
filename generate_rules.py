@@ -11,7 +11,6 @@ from urllib.parse import urlparse
 # =============================
 BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 JSON_DB = os.path.join(BASE_PATH, 'db.json')
-# 输出文件名建议保持 .list 或 .txt，SubConverter 识别更稳，这里按你要求的来
 OUTPUT_FILE = os.path.join(BASE_PATH, 'MyVideo.yml')
 
 HEADERS = {
@@ -45,6 +44,7 @@ def fetch_domains(api_url, domain_counter):
                     domain = urlparse(u).netloc.split(':')[0].lower()
                     if not domain or "." not in domain: continue
                     root = get_root_domain(domain)
+                    # 采集到的新域名加 1 分
                     domain_counter[domain] = domain_counter.get(domain, 0) + 1
                     domain_counter[root] = domain_counter.get(root, 0) + 1
                     found_domains.update([domain, root])
@@ -58,7 +58,7 @@ def fetch_domains(api_url, domain_counter):
 # 🚀 主程序
 # =============================
 def generate():
-    print("--- [PROD] SubConverter 规则更新任务启动 ---")
+    print("--- [PROD] 规则更新任务启动 ---")
     if not os.path.exists(JSON_DB):
         print("❌ 错误: db.json 不存在"); return
 
@@ -67,20 +67,21 @@ def generate():
     
     count_old, count_new = 0, 0
 
-    # 1. 【历史保护】读取旧规则
+    # 1. 【核心：历史保护】读取旧规则并赋予极高权重
     if os.path.exists(OUTPUT_FILE):
-        print("📥 正在加载存量规则...")
+        print("📥 正在加载存量规则并锁定权重...")
         try:
             with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
-                for line in f:
-                    # 适配多种旧格式，提取域名部分
-                    match = re.search(r'DOMAIN(?:-SUFFIX|-KEYWORD)?,\s*([^,\s\n]+)', line)
-                    if match:
-                        d = match.group(1).lower().strip()
-                        if d not in all_domains:
-                            all_domains.add(d)
-                            count_old += 1
-                        domain_counter[d] = 10 
+                content = f.read()
+                # 兼容 DOMAIN 和 DOMAIN-SUFFIX
+                existing = re.findall(r'DOMAIN(?:-SUFFIX)?,\s*([^,\s\n]+)', content)
+                for d in existing:
+                    d = d.lower().strip()
+                    if d not in all_domains:
+                        all_domains.add(d)
+                        count_old += 1
+                    # 给旧文件里已有的域名初始权重设为 10，确保它们绝对不会被过滤
+                    domain_counter[d] = 10 
         except Exception as e:
             print(f"⚠️ 读取旧文件失败: {e}")
 
@@ -103,42 +104,40 @@ def generate():
             else: print(" ❌ Error")
         else: print(" ⏩ Skip")
 
-    # 3. 【智能过滤】
+    # 3. 【核心：智能过滤】
     final_domains = set()
     for d in all_domains:
+        # 保留逻辑：
+        # - 条件 A: 是根域名 (如 aaa.com)
+        # - 条件 B: 是历史存量 (权重 >= 10)
+        # - 条件 C: 是新采集且频率足够高 (权重 >= 2)
         if d.count('.') == 1 or domain_counter.get(d, 0) >= 10 or domain_counter.get(d, 0) >= 2:
             final_domains.add(d)
 
-    blacklist = {"static", "api", "player", "image", "ts", "index", "script", "css", "js", "www"}
+    blacklist = {"static", "api", "player", "image", "ts", "index", "script", "css", "js"}
     final_keywords = {k for k in all_keywords if k not in blacklist and len(k) > 3}
 
-    # 4. 写入文件 (SubConverter 纯文本格式)
-    # 注意：删除了 payload: 和横杠，确保雅典娜不再报错
+    # 4. 写入 YAML (payload 格式)
     print(f"📝 写入更新至 {OUTPUT_FILE}...")
     try:
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-            # 排序确保 Git 变化清晰
+            f.write("payload:\n")
+            # 排序确保 Git Diff 最小化
             sorted_ds = sorted(list(final_domains))
-            
-            # 写入子域名精确匹配
+            # 先写子域名精确匹配
             for d in sorted_ds:
-                if d.count('.') >= 2: 
-                    f.write(f"DOMAIN,{d}\n")
-            
-            # 写入根域名后缀匹配
+                if d.count('.') >= 2: f.write(f"  - DOMAIN,{d}\n")
+            # 再写根域名后缀匹配
             for d in sorted_ds:
-                if d.count('.') == 1: 
-                    f.write(f"DOMAIN-SUFFIX,{d}\n")
-            
-            # 写入关键字匹配
-            for k in sorted(list(final_keywords)):
-                f.write(f"DOMAIN-KEYWORD,{k}\n")
-                
+                if d.count('.') == 1: f.write(f"  - DOMAIN-SUFFIX,{d}\n")
+            # 最后写关键字
+            for k in sorted(final_keywords):
+                f.write(f"  - DOMAIN-KEYWORD,{k}\n")
     except Exception as e:
         print(f"❌ 写入失败: {e}")
 
     print(f"\n[STATS] 继承:{count_old} | 新获:{count_new} | 最终总数:{len(final_domains)}")
-    print("✨ 格式已切换为 SubConverter 纯文本模式，请更新后重试。")
+    print("--- 任务圆满完成 ---")
 
 if __name__ == "__main__":
     generate()
