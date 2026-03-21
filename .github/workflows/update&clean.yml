@@ -53,17 +53,19 @@ jobs:
           fi
 
   # 定期清理历史记录，保持仓库整洁
-  cleanup:
-    runs-on: ubuntu-latest
-    needs: build
-    permissions:
-      actions: write
-    steps:
-      - name: Delete old runs
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          run_ids=$(gh run list --limit 50 --json databaseId --jq '.[5:] | map(.databaseId) | .[]' 2>/dev/null || echo "")
-          if [ ! -z "$run_ids" ]; then
-            for id in $run_ids; do gh run delete "$id"; done
-          fi
+ cleanup:
+  runs-on: ubuntu-latest
+  needs: build
+  permissions:
+    actions: write
+  steps:
+    - name: Delete old runs
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        run_ids=$(gh run list --limit 50 --json databaseId --jq '.[5:] | map(.databaseId) | .[]' 2>/dev/null || echo "")
+        if [ ! -z "$run_ids" ]; then
+          for id in $run_ids; do
+            gh api repos/${{ github.repository }}/actions/runs/$id -X DELETE
+          done
+        fi
