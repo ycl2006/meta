@@ -59,15 +59,17 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # 核心修复：显式指定 -R 仓库，不再依赖本地 .git 文件夹
-          # 这样即便不执行 checkout 步骤，脚本也能通过 API 正常运行
-          run_ids=$(gh run list -R ${{ github.repository }} --limit 50 --json databaseId --jq '.[5:].databaseId' || echo "")
-          
-          if [ ! -z "$run_ids" ]; then
+          # 1. 显式指定仓库获取 ID 列表
+          # 2. 这里的 jq 逻辑：获取所有 ID，跳过最近的 5 个（保留 5 个）
+          run_ids=$(gh run list -R ${{ github.repository }} --limit 50 --json databaseId --jq '.[5:].databaseId' | tr -d '[],"')
+
+          if [ ! -z "$run_ids" ] && [ "$run_ids" != "null" ]; then
+            echo "发现旧记录，准备清理..."
             for id in $run_ids; do
-              gh api repos/${{ github.repository }}/actions/runs/$id -X DELETE
+              # 使用内置的 delete 命令，比直接调 API 更不容易出错
+              gh run delete -R ${{ github.repository }} $id
             done
-            echo "Cleanup completed."
+            echo "清理完成。"
           else
-            echo "No old runs to clean."
+            echo "没有需要清理的旧记录。"
           fi
