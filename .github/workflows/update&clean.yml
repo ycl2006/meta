@@ -48,7 +48,7 @@ jobs:
             fi
           fi
 
-  cleanup:
+ cleanup:
     runs-on: ubuntu-latest
     needs: build
     if: always() 
@@ -59,19 +59,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          # 使用 -r 获取原始字符串格式的 ID，避免科学计数法 (e+10)
-          # jq '.[5:].databaseId' 表示跳过最新的 5 个
-          run_ids=$(gh run list -R ${{ github.repository }} --limit 50 --json databaseId --jq '.[5:] | .[].databaseId' || echo "")
+          # 使用 jq 提取原始 ID，跳过前 5 个
+          run_ids=$(gh run list -R ${{ github.repository }} --limit 50 --json databaseId --jq '.[5:] | .[].databaseId')
 
-          if [ ! -z "$run_ids" ] && [ "$run_ids" != "null" ]; then
+          if [ -n "$run_ids" ]; then
             echo "发现旧记录，开始清理..."
             for id in $run_ids; do
-              # 这里的引号 "$id" 非常重要，确保它被当作字符串处理
               gh run delete -R ${{ github.repository }} "$id"
             done
             echo "清理完成。"
           else
-            echo "当前运行记录少于 5 条，无需清理。"
-          fi
-            echo "没有需要清理的旧记录（当前记录少于 5 条）。"
+            echo "当前记录少于 5 条，无需清理。"
           fi
