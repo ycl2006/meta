@@ -117,7 +117,7 @@ def generate():
     blacklist = {"static", "api", "player", "image", "ts", "index", "script", "css", "js"}
     final_keywords = {k for k in all_keywords if k not in blacklist and len(k) > 3}
 
-    # 4. 写入 YAML (payload 格式)
+    # 4. 写入 YAML (rules 格式)
     print(f"📝 写入更新至 {OUTPUT_FILE}...")
     try:
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
