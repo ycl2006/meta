@@ -151,10 +151,14 @@
       "active": true
     },
     {
-      "key": "aidan",
-      "name": "爱蛋资源",
-      "api": "https://lovedan.net/api.php/provide/vod",
-      "active": true
+  "key": "aidan",
+  "name": "爱蛋资源",
+  "type": 1,
+  "api": "https://lovedan.net/api.php/provide/vod/",
+  "searchable": 1,
+  "quickSearch": 1,
+  "filterable": 1,
+  "parse": 1
     },
     {
       "key": "leba",
