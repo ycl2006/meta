@@ -527,6 +527,7 @@ rules:
   - DOMAIN-SUFFIX,zuidazym3u8.com
   - DOMAIN-KEYWORD,360zy
   - DOMAIN-KEYWORD,360zyx
+  - DOMAIN-KEYWORD,a0887
   - DOMAIN-KEYWORD,bfikuncdn
   - DOMAIN-KEYWORD,bfllvip
   - DOMAIN-KEYWORD,bfvvs
@@ -569,7 +570,11 @@ rules:
   - DOMAIN-KEYWORD,jisuzyv
   - DOMAIN-KEYWORD,jszy
   - DOMAIN-KEYWORD,lbsl2026
-  - DOMAIN-KEYWORD,lbv325627
+  - DOMAIN-KEYWORD,lfthirtytwo
+  - DOMAIN-KEYWORD,lz-cdn11
+  - DOMAIN-KEYWORD,lz-cdn12
+  - DOMAIN-KEYWORD,lz-cdn13
+  - DOMAIN-KEYWORD,lz-cdn5
   - DOMAIN-KEYWORD,lz15uu
   - DOMAIN-KEYWORD,lzcdn23
   - DOMAIN-KEYWORD,lzcdn27
@@ -583,7 +588,6 @@ rules:
   - DOMAIN-KEYWORD,modujx14
   - DOMAIN-KEYWORD,modujx15
   - DOMAIN-KEYWORD,modujx16
-  - DOMAIN-KEYWORD,phimgood
   - DOMAIN-KEYWORD,play-cdn10
   - DOMAIN-KEYWORD,play-cdn11
   - DOMAIN-KEYWORD,play-cdn12
@@ -595,6 +599,7 @@ rules:
   - DOMAIN-KEYWORD,play-cdn18
   - DOMAIN-KEYWORD,play-cdn19
   - DOMAIN-KEYWORD,play-cdn2
+  - DOMAIN-KEYWORD,play-cdn3
   - DOMAIN-KEYWORD,play-cdn4
   - DOMAIN-KEYWORD,play-cdn6
   - DOMAIN-KEYWORD,play-cdn7
@@ -604,15 +609,14 @@ rules:
   - DOMAIN-KEYWORD,ppqrrs
   - DOMAIN-KEYWORD,qqqrst
   - DOMAIN-KEYWORD,ryiplay18
-  - DOMAIN-KEYWORD,ryiplay19
   - DOMAIN-KEYWORD,ryplay10
   - DOMAIN-KEYWORD,ryplay11
   - DOMAIN-KEYWORD,ryplay12
   - DOMAIN-KEYWORD,ryplay14
-  - DOMAIN-KEYWORD,ryplay16
   - DOMAIN-KEYWORD,ryplay17
   - DOMAIN-KEYWORD,ryplay4
   - DOMAIN-KEYWORD,ryplay7
+  - DOMAIN-KEYWORD,tyyszywvod
   - DOMAIN-KEYWORD,tyyszywvod1
   - DOMAIN-KEYWORD,ukubf3
   - DOMAIN-KEYWORD,ukubf4
