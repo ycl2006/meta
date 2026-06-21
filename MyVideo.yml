@@ -584,41 +584,37 @@ rules:
   - DOMAIN-KEYWORD,bfikuncdn
   - DOMAIN-KEYWORD,bfvvs
   - DOMAIN-KEYWORD,bfzy
-  - DOMAIN-KEYWORD,bvvvvvvv7f
-  - DOMAIN-KEYWORD,bvvvvvvvvv1f
   - DOMAIN-KEYWORD,cdnlz
   - DOMAIN-KEYWORD,cdnlz13
   - DOMAIN-KEYWORD,cdnlz18
   - DOMAIN-KEYWORD,cdnlz21
   - DOMAIN-KEYWORD,cdnlz22
   - DOMAIN-KEYWORD,cdnlz7
-  - DOMAIN-KEYWORD,ddbbffcdn
   - DOMAIN-KEYWORD,dytt-cine
   - DOMAIN-KEYWORD,dytt-cinema
   - DOMAIN-KEYWORD,dytt-hot
-  - DOMAIN-KEYWORD,dytt-kan
-  - DOMAIN-KEYWORD,dytt-luck
   - DOMAIN-KEYWORD,dytt-network
+  - DOMAIN-KEYWORD,dytt-see
   - DOMAIN-KEYWORD,dytt-tvs
   - DOMAIN-KEYWORD,feifei-kan
   - DOMAIN-KEYWORD,feifei-video
-  - DOMAIN-KEYWORD,fengbao8
-  - DOMAIN-KEYWORD,fengbao9
   - DOMAIN-KEYWORD,ffzy
+  - DOMAIN-KEYWORD,ffzy-online1
   - DOMAIN-KEYWORD,ffzy-online3
   - DOMAIN-KEYWORD,ffzy-online5
   - DOMAIN-KEYWORD,ffzy-online6
   - DOMAIN-KEYWORD,ffzy-play10
+  - DOMAIN-KEYWORD,ffzy-play2
   - DOMAIN-KEYWORD,ffzy-play5
   - DOMAIN-KEYWORD,ffzy-play9
   - DOMAIN-KEYWORD,ffzy-plays
-  - DOMAIN-KEYWORD,ffzyread2
+  - DOMAIN-KEYWORD,gsuus
   - DOMAIN-KEYWORD,hhuus
-  - DOMAIN-KEYWORD,high20-playback
+  - DOMAIN-KEYWORD,huyall
+  - DOMAIN-KEYWORD,ijycnd
   - DOMAIN-KEYWORD,jisuzyv
   - DOMAIN-KEYWORD,jszy
   - DOMAIN-KEYWORD,lbsl2026
-  - DOMAIN-KEYWORD,lfthirtytwo
   - DOMAIN-KEYWORD,lz-cdn11
   - DOMAIN-KEYWORD,lz-cdn12
   - DOMAIN-KEYWORD,lz-cdn13
@@ -633,6 +629,7 @@ rules:
   - DOMAIN-KEYWORD,lzzy
   - DOMAIN-KEYWORD,m3u8
   - DOMAIN-KEYWORD,maowushi
+  - DOMAIN-KEYWORD,modujx10
   - DOMAIN-KEYWORD,modujx11
   - DOMAIN-KEYWORD,modujx12
   - DOMAIN-KEYWORD,modujx13
@@ -642,16 +639,12 @@ rules:
   - DOMAIN-KEYWORD,phimgood
   - DOMAIN-KEYWORD,play-cdn17
   - DOMAIN-KEYWORD,play-cdn2
-  - DOMAIN-KEYWORD,playback-speed
   - DOMAIN-KEYWORD,power34play
   - DOMAIN-KEYWORD,ppqrrs
   - DOMAIN-KEYWORD,qqqrst
-  - DOMAIN-KEYWORD,rrcdnbf5
-  - DOMAIN-KEYWORD,rrcdnbf6
   - DOMAIN-KEYWORD,ryiplay18
   - DOMAIN-KEYWORD,ryiplay19
   - DOMAIN-KEYWORD,ryplay10
-  - DOMAIN-KEYWORD,ryplay11
   - DOMAIN-KEYWORD,ryplay12
   - DOMAIN-KEYWORD,ryplay16
   - DOMAIN-KEYWORD,ryplay17
@@ -659,9 +652,15 @@ rules:
   - DOMAIN-KEYWORD,tyyszywvod1
   - DOMAIN-KEYWORD,tyyszywvod2
   - DOMAIN-KEYWORD,ukubf3
-  - DOMAIN-KEYWORD,ukubf4
   - DOMAIN-KEYWORD,ukubf5
+  - DOMAIN-KEYWORD,vvvip-plays33
   - DOMAIN-KEYWORD,xluuss
   - DOMAIN-KEYWORD,yzzy
+  - DOMAIN-KEYWORD,yzzy27-play
+  - DOMAIN-KEYWORD,yzzy28-play
+  - DOMAIN-KEYWORD,yzzy30-play
+  - DOMAIN-KEYWORD,yzzy31-play
   - DOMAIN-KEYWORD,yzzyssvip-36
+  - DOMAIN-KEYWORD,yzzyvip-29
+  - DOMAIN-KEYWORD,yzzyvip-35
   - DOMAIN-KEYWORD,zuidazym3u8
