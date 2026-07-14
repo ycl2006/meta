@@ -597,29 +597,34 @@ rules:
   - DOMAIN-SUFFIX,zuidapic.com
   - DOMAIN-SUFFIX,zuidazym3u8.com
   - DOMAIN-KEYWORD,360zy
-  - DOMAIN-KEYWORD,baofeng11
   - DOMAIN-KEYWORD,baofeng9
   - DOMAIN-KEYWORD,bfikuncdn
   - DOMAIN-KEYWORD,bfvvs
   - DOMAIN-KEYWORD,bfzy
+  - DOMAIN-KEYWORD,bvvvvvvvvv1f
   - DOMAIN-KEYWORD,cdnlz
+  - DOMAIN-KEYWORD,cdnlz1
+  - DOMAIN-KEYWORD,cdnlz11
+  - DOMAIN-KEYWORD,cdnlz12
   - DOMAIN-KEYWORD,cdnlz13
+  - DOMAIN-KEYWORD,cdnlz14
   - DOMAIN-KEYWORD,cdnlz18
+  - DOMAIN-KEYWORD,cdnlz2
   - DOMAIN-KEYWORD,cdnlz21
+  - DOMAIN-KEYWORD,cdnlz22
+  - DOMAIN-KEYWORD,cdnlz3
   - DOMAIN-KEYWORD,cdnlz4
   - DOMAIN-KEYWORD,cdnlz7
+  - DOMAIN-KEYWORD,cdnlz9
   - DOMAIN-KEYWORD,dytt-cine
   - DOMAIN-KEYWORD,dytt-cinema
   - DOMAIN-KEYWORD,dytt-hot
-  - DOMAIN-KEYWORD,dytt-kan
-  - DOMAIN-KEYWORD,dytt-movies
+  - DOMAIN-KEYWORD,dytt-luck
   - DOMAIN-KEYWORD,dytt-see
   - DOMAIN-KEYWORD,dytt-tvs
-  - DOMAIN-KEYWORD,dytt-video
   - DOMAIN-KEYWORD,feifei-kan
   - DOMAIN-KEYWORD,feifei-play
-  - DOMAIN-KEYWORD,fengbao10
-  - DOMAIN-KEYWORD,fengbao11
+  - DOMAIN-KEYWORD,fengbao8
   - DOMAIN-KEYWORD,ffzy
   - DOMAIN-KEYWORD,ffzy-bofang
   - DOMAIN-KEYWORD,ffzy-online1
@@ -627,58 +632,47 @@ rules:
   - DOMAIN-KEYWORD,ffzy-online5
   - DOMAIN-KEYWORD,ffzy-online6
   - DOMAIN-KEYWORD,ffzy-play10
-  - DOMAIN-KEYWORD,ffzy-play2
   - DOMAIN-KEYWORD,ffzy-play5
   - DOMAIN-KEYWORD,ffzy-play9
   - DOMAIN-KEYWORD,ffzy-plays
+  - DOMAIN-KEYWORD,ffzyread2
   - DOMAIN-KEYWORD,gsuus
   - DOMAIN-KEYWORD,hhuus
-  - DOMAIN-KEYWORD,high20-playback
-  - DOMAIN-KEYWORD,high23-playback
-  - DOMAIN-KEYWORD,high24-playback
-  - DOMAIN-KEYWORD,high25-playback
-  - DOMAIN-KEYWORD,high26-playback
   - DOMAIN-KEYWORD,huyall
   - DOMAIN-KEYWORD,ijycnd
   - DOMAIN-KEYWORD,jisuzyv
   - DOMAIN-KEYWORD,jszy
   - DOMAIN-KEYWORD,lbsl2026
+  - DOMAIN-KEYWORD,lfthirtytwo
+  - DOMAIN-KEYWORD,lz-cdn1
   - DOMAIN-KEYWORD,lz-cdn11
   - DOMAIN-KEYWORD,lz-cdn12
   - DOMAIN-KEYWORD,lz-cdn13
+  - DOMAIN-KEYWORD,lz-cdn14
+  - DOMAIN-KEYWORD,lz-cdn18
+  - DOMAIN-KEYWORD,lz-cdn3
   - DOMAIN-KEYWORD,lz-cdn5
+  - DOMAIN-KEYWORD,lz-cdn7
+  - DOMAIN-KEYWORD,lz-cdn9
   - DOMAIN-KEYWORD,lz15uu
   - DOMAIN-KEYWORD,lzcdn10
+  - DOMAIN-KEYWORD,lzcdn2
   - DOMAIN-KEYWORD,lzcdn23
+  - DOMAIN-KEYWORD,lzcdn25
+  - DOMAIN-KEYWORD,lzcdn26
   - DOMAIN-KEYWORD,lzcdn27
   - DOMAIN-KEYWORD,lzcdn28
   - DOMAIN-KEYWORD,lzcdn31
+  - DOMAIN-KEYWORD,lzcdn32
   - DOMAIN-KEYWORD,lzcdn33v1
   - DOMAIN-KEYWORD,lzzy
   - DOMAIN-KEYWORD,m3u8
   - DOMAIN-KEYWORD,maowushi
   - DOMAIN-KEYWORD,modujx11
-  - DOMAIN-KEYWORD,modujx12
-  - DOMAIN-KEYWORD,modujx13
-  - DOMAIN-KEYWORD,modujx14
-  - DOMAIN-KEYWORD,modujx15
-  - DOMAIN-KEYWORD,modujx16
   - DOMAIN-KEYWORD,modujx17
   - DOMAIN-KEYWORD,phimgood
-  - DOMAIN-KEYWORD,play-cdn10
-  - DOMAIN-KEYWORD,play-cdn11
-  - DOMAIN-KEYWORD,play-cdn12
-  - DOMAIN-KEYWORD,play-cdn13
-  - DOMAIN-KEYWORD,play-cdn14
-  - DOMAIN-KEYWORD,play-cdn15
-  - DOMAIN-KEYWORD,play-cdn16
   - DOMAIN-KEYWORD,play-cdn17
-  - DOMAIN-KEYWORD,play-cdn18
-  - DOMAIN-KEYWORD,play-cdn19
   - DOMAIN-KEYWORD,play-cdn2
-  - DOMAIN-KEYWORD,play-cdn6
-  - DOMAIN-KEYWORD,play-cdn7
-  - DOMAIN-KEYWORD,play-cdn9
   - DOMAIN-KEYWORD,playback-speed
   - DOMAIN-KEYWORD,power34play
   - DOMAIN-KEYWORD,ppqrrs
@@ -686,23 +680,18 @@ rules:
   - DOMAIN-KEYWORD,ryiplay18
   - DOMAIN-KEYWORD,ryplay10
   - DOMAIN-KEYWORD,ryplay11
+  - DOMAIN-KEYWORD,ryplay12
   - DOMAIN-KEYWORD,ryplay14
   - DOMAIN-KEYWORD,ryplay17
+  - DOMAIN-KEYWORD,ryplay4
   - DOMAIN-KEYWORD,tyyszywvod
   - DOMAIN-KEYWORD,tyyszywvod1
   - DOMAIN-KEYWORD,tyyszywvod2
+  - DOMAIN-KEYWORD,ukubf3
   - DOMAIN-KEYWORD,ukubf5
-  - DOMAIN-KEYWORD,ukubf8
-  - DOMAIN-KEYWORD,vvvip-plays33
   - DOMAIN-KEYWORD,xluuss
-  - DOMAIN-KEYWORD,yyzy-play
   - DOMAIN-KEYWORD,yzzy
-  - DOMAIN-KEYWORD,yzzy27-play
   - DOMAIN-KEYWORD,yzzy28-play
   - DOMAIN-KEYWORD,yzzy31-play
-  - DOMAIN-KEYWORD,yzzy32-play
-  - DOMAIN-KEYWORD,yzzyhd-play
-  - DOMAIN-KEYWORD,yzzyssvip-36
-  - DOMAIN-KEYWORD,yzzyvip-29
   - DOMAIN-KEYWORD,yzzyvip-35
   - DOMAIN-KEYWORD,zuidazym3u8
