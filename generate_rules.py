@@ -73,19 +73,19 @@ def generate():
         try:
             with open(OUTPUT_FILE, 'r', encoding='utf-8') as f:
                 content = f.read()
-                # 兼容 DOMAIN 和 DOMAIN-SUFFIX
-                existing = re.findall(r'DOMAIN(?:-SUFFIX)?,\s*([^,\s\n]+)', content)
+                # 兼容 DOMAIN, DOMAIN-SUFFIX 和 DOMAIN-KEYWORD
+                existing = re.findall(r'DOMAIN(?:-SUFFIX|-KEYWORD)?,\s*([^,\s\n]+)', content)
                 for d in existing:
                     d = d.lower().strip()
                     if d not in all_domains:
                         all_domains.add(d)
                         count_old += 1
-                    # 给旧文件里已有的域名初始权重设为 10，确保它们绝对不会被过滤
+                    # 给旧文件里已有的域名初始权重设为 10，确保绝对不会被过滤
                     domain_counter[d] = 10 
         except Exception as e:
             print(f"⚠️ 读取旧文件失败: {e}")
 
-    # 2. 采集新数
+    # 2. 采集新数据
     with open(JSON_DB, 'r', encoding='utf-8') as f:
         sites = json.load(f).get('sites', [])
 
@@ -107,30 +107,31 @@ def generate():
     # 3. 【核心：智能过滤】
     final_domains = set()
     for d in all_domains:
-        # 保留逻辑：
-        # - 条件 A: 是根域名 (如 aaa.com)
-        # - 条件 B: 是历史存量 (权重 >= 10)
-        # - 条件 C: 是新采集且频率足够高 (权重 >= 2)
         if d.count('.') == 1 or domain_counter.get(d, 0) >= 10 or domain_counter.get(d, 0) >= 2:
             final_domains.add(d)
 
     blacklist = {"static", "api", "player", "image", "ts", "index", "script", "css", "js"}
     final_keywords = {k for k in all_keywords if k not in blacklist and len(k) > 3}
 
-    # 4. 写入 YAML (rules 格式)
+    # 4. 写入 YAML (payload 格式)
     print(f"📝 写入更新至 {OUTPUT_FILE}...")
     try:
         with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-            f.write("rules:\n")
+            # ‼️【关键点修正】：Clash 外部规则集根关键字必须是 payload ‼️
+            f.write("payload:\n")
+            
             # 排序确保 Git Diff 最小化
             sorted_ds = sorted(list(final_domains))
-            # 先写子域名精确匹配
+            
+            # 先写子域名精确匹配 (例如 DOMAIN,v1.cdnlz.com)
             for d in sorted_ds:
                 if d.count('.') >= 2: f.write(f"  - DOMAIN,{d}\n")
-            # 再写根域名后缀匹配
+                
+            # 再写根域名后缀匹配 (例如 DOMAIN-SUFFIX,cdnlz.com)
             for d in sorted_ds:
                 if d.count('.') == 1: f.write(f"  - DOMAIN-SUFFIX,{d}\n")
-            # 最后写关键字
+                
+            # 最后写关键字匹配 (例如 DOMAIN-KEYWORD,m3u8)
             for k in sorted(final_keywords):
                 f.write(f"  - DOMAIN-KEYWORD,{k}\n")
     except Exception as e:
