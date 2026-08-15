@@ -601,29 +601,21 @@ payload:
   - DOMAIN-SUFFIX,zuidapic.com
   - DOMAIN-SUFFIX,zuidazym3u8.com
   - DOMAIN-KEYWORD,360zy
-  - DOMAIN-KEYWORD,baofeng11
-  - DOMAIN-KEYWORD,baofeng9
   - DOMAIN-KEYWORD,bfikuncdn
   - DOMAIN-KEYWORD,bfllvip
   - DOMAIN-KEYWORD,bfvvs
   - DOMAIN-KEYWORD,bfzy
-  - DOMAIN-KEYWORD,bvvvvvvv7f
   - DOMAIN-KEYWORD,cdnlz
-  - DOMAIN-KEYWORD,cdnlz14
-  - DOMAIN-KEYWORD,cdnlz21
-  - DOMAIN-KEYWORD,cdnlz22
-  - DOMAIN-KEYWORD,cdnlz3
-  - DOMAIN-KEYWORD,cdnlz9
-  - DOMAIN-KEYWORD,ddbbffcdn
+  - DOMAIN-KEYWORD,feifei-kan
   - DOMAIN-KEYWORD,feifei-play
-  - DOMAIN-KEYWORD,fengbao10
-  - DOMAIN-KEYWORD,fengbao11
-  - DOMAIN-KEYWORD,fengbao8
   - DOMAIN-KEYWORD,ffzy
   - DOMAIN-KEYWORD,ffzy-bofang
+  - DOMAIN-KEYWORD,ffzy-online1
   - DOMAIN-KEYWORD,ffzy-online3
+  - DOMAIN-KEYWORD,ffzy-online5
   - DOMAIN-KEYWORD,ffzy-online6
   - DOMAIN-KEYWORD,ffzy-play10
+  - DOMAIN-KEYWORD,ffzy-play5
   - DOMAIN-KEYWORD,ffzy-play9
   - DOMAIN-KEYWORD,ffzy-plays
   - DOMAIN-KEYWORD,gsuus
@@ -633,13 +625,9 @@ payload:
   - DOMAIN-KEYWORD,jisuzyv
   - DOMAIN-KEYWORD,jszy
   - DOMAIN-KEYWORD,lbsl2026
-  - DOMAIN-KEYWORD,lfthirtytwo
-  - DOMAIN-KEYWORD,lz-cdn14
-  - DOMAIN-KEYWORD,lz-cdn16
   - DOMAIN-KEYWORD,lz15uu
   - DOMAIN-KEYWORD,lzcdn27
-  - DOMAIN-KEYWORD,lzcdn28
-  - DOMAIN-KEYWORD,lzcdn31
+  - DOMAIN-KEYWORD,lzcdn34
   - DOMAIN-KEYWORD,lzzy
   - DOMAIN-KEYWORD,m3u8
   - DOMAIN-KEYWORD,maowushi
@@ -652,12 +640,11 @@ payload:
   - DOMAIN-KEYWORD,modujx17
   - DOMAIN-KEYWORD,ppqrrs
   - DOMAIN-KEYWORD,qqqrst
-  - DOMAIN-KEYWORD,rrcdnbf5
-  - DOMAIN-KEYWORD,rrcdnbf6
   - DOMAIN-KEYWORD,tyyszywvod
   - DOMAIN-KEYWORD,tyyszywvod1
   - DOMAIN-KEYWORD,tyyszywvod2
   - DOMAIN-KEYWORD,ukubf3
+  - DOMAIN-KEYWORD,ukubf4
   - DOMAIN-KEYWORD,ukubf5
   - DOMAIN-KEYWORD,ukubf8
   - DOMAIN-KEYWORD,xluuss
