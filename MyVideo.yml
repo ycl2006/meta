@@ -605,7 +605,6 @@ payload:
   - DOMAIN-KEYWORD,baofeng11
   - DOMAIN-KEYWORD,baofeng9
   - DOMAIN-KEYWORD,bfikuncdn
-  - DOMAIN-KEYWORD,bfllvip
   - DOMAIN-KEYWORD,bfvvs
   - DOMAIN-KEYWORD,bfzy
   - DOMAIN-KEYWORD,bvvvvvvv7f
@@ -614,7 +613,6 @@ payload:
   - DOMAIN-KEYWORD,cdnlz13
   - DOMAIN-KEYWORD,cdnlz18
   - DOMAIN-KEYWORD,cdnlz21
-  - DOMAIN-KEYWORD,cdnlz22
   - DOMAIN-KEYWORD,cdnlz7
   - DOMAIN-KEYWORD,ddbbffcdn
   - DOMAIN-KEYWORD,dytt-cine
@@ -622,6 +620,7 @@ payload:
   - DOMAIN-KEYWORD,dytt-hot
   - DOMAIN-KEYWORD,dytt-luck
   - DOMAIN-KEYWORD,dytt-network
+  - DOMAIN-KEYWORD,dytt-see
   - DOMAIN-KEYWORD,dytt-tvs
   - DOMAIN-KEYWORD,feifei-kan
   - DOMAIN-KEYWORD,feifei-play
@@ -647,11 +646,11 @@ payload:
   - DOMAIN-KEYWORD,jisuzyv
   - DOMAIN-KEYWORD,jszy
   - DOMAIN-KEYWORD,lbsl2026
-  - DOMAIN-KEYWORD,lfthirtytwo
   - DOMAIN-KEYWORD,lz-cdn11
   - DOMAIN-KEYWORD,lz-cdn12
   - DOMAIN-KEYWORD,lz-cdn13
   - DOMAIN-KEYWORD,lz-cdn5
+  - DOMAIN-KEYWORD,lz15uu
   - DOMAIN-KEYWORD,lzcdn10
   - DOMAIN-KEYWORD,lzcdn23
   - DOMAIN-KEYWORD,lzcdn27
@@ -665,7 +664,6 @@ payload:
   - DOMAIN-KEYWORD,modujx11
   - DOMAIN-KEYWORD,modujx12
   - DOMAIN-KEYWORD,modujx13
-  - DOMAIN-KEYWORD,modujx14
   - DOMAIN-KEYWORD,modujx15
   - DOMAIN-KEYWORD,modujx16
   - DOMAIN-KEYWORD,modujx17
@@ -674,13 +672,16 @@ payload:
   - DOMAIN-KEYWORD,play-cdn2
   - DOMAIN-KEYWORD,ppqrrs
   - DOMAIN-KEYWORD,qqqrst
-  - DOMAIN-KEYWORD,rrcdnbf4
+  - DOMAIN-KEYWORD,rrcdnbf2
   - DOMAIN-KEYWORD,rrcdnbf5
   - DOMAIN-KEYWORD,rrcdnbf6
-  - DOMAIN-KEYWORD,ryiplay19
+  - DOMAIN-KEYWORD,ryiplay18
+  - DOMAIN-KEYWORD,ryplay10
+  - DOMAIN-KEYWORD,ryplay11
   - DOMAIN-KEYWORD,ryplay12
-  - DOMAIN-KEYWORD,ryplay16
   - DOMAIN-KEYWORD,ryplay17
+  - DOMAIN-KEYWORD,ryplay5
+  - DOMAIN-KEYWORD,ryplay7
   - DOMAIN-KEYWORD,tyyszywvod
   - DOMAIN-KEYWORD,tyyszywvod1
   - DOMAIN-KEYWORD,tyyszywvod2
@@ -692,8 +693,8 @@ payload:
   - DOMAIN-KEYWORD,xluuss
   - DOMAIN-KEYWORD,yzzy
   - DOMAIN-KEYWORD,yzzy27-play
-  - DOMAIN-KEYWORD,yzzy30-play
+  - DOMAIN-KEYWORD,yzzy28-play
   - DOMAIN-KEYWORD,yzzy31-play
-  - DOMAIN-KEYWORD,yzzyvip-29
+  - DOMAIN-KEYWORD,yzzy32-play
   - DOMAIN-KEYWORD,yzzyvip-35
   - DOMAIN-KEYWORD,zuidazym3u8
