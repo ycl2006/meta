@@ -463,6 +463,7 @@ payload:
   - DOMAIN-SUFFIX,kuktxu.com
   - DOMAIN-SUFFIX,lbapi9.com
   - DOMAIN-SUFFIX,lbb2025.com
+  - DOMAIN-SUFFIX,lbpl26.com
   - DOMAIN-SUFFIX,lbsl2026.com
   - DOMAIN-SUFFIX,lbv325627.com
   - DOMAIN-SUFFIX,lbv3lb2025.com
@@ -631,7 +632,6 @@ payload:
   - DOMAIN-KEYWORD,bfeng10
   - DOMAIN-KEYWORD,bfeng11
   - DOMAIN-KEYWORD,bfikuncdn
-  - DOMAIN-KEYWORD,bfllvip
   - DOMAIN-KEYWORD,bfvvs
   - DOMAIN-KEYWORD,bfzy
   - DOMAIN-KEYWORD,bvvvvvvv7f
@@ -662,8 +662,8 @@ payload:
   - DOMAIN-KEYWORD,ffzy-online5
   - DOMAIN-KEYWORD,ffzy-online6
   - DOMAIN-KEYWORD,ffzy-play10
-  - DOMAIN-KEYWORD,ffzy-play2
   - DOMAIN-KEYWORD,ffzy-play5
+  - DOMAIN-KEYWORD,ffzy-play6
   - DOMAIN-KEYWORD,ffzy-play9
   - DOMAIN-KEYWORD,ffzy-plays
   - DOMAIN-KEYWORD,gsuus
@@ -676,16 +676,14 @@ payload:
   - DOMAIN-KEYWORD,jisuzyv
   - DOMAIN-KEYWORD,jszy
   - DOMAIN-KEYWORD,kuktxu
+  - DOMAIN-KEYWORD,lbpl26
   - DOMAIN-KEYWORD,lbsl2026
   - DOMAIN-KEYWORD,lfthirtytwo
-  - DOMAIN-KEYWORD,lz-cdn
   - DOMAIN-KEYWORD,lz-cdn11
   - DOMAIN-KEYWORD,lz-cdn12
   - DOMAIN-KEYWORD,lz-cdn13
   - DOMAIN-KEYWORD,lz-cdn14
   - DOMAIN-KEYWORD,lz-cdn5
-  - DOMAIN-KEYWORD,lz-cdn6
-  - DOMAIN-KEYWORD,lz-cdn8
   - DOMAIN-KEYWORD,lz-cdn9
   - DOMAIN-KEYWORD,lzcdn10
   - DOMAIN-KEYWORD,lzcdn23
@@ -693,22 +691,17 @@ payload:
   - DOMAIN-KEYWORD,lzcdn27
   - DOMAIN-KEYWORD,lzcdn28
   - DOMAIN-KEYWORD,lzcdn31
-  - DOMAIN-KEYWORD,lzcdnv35
   - DOMAIN-KEYWORD,lzv22
   - DOMAIN-KEYWORD,lzv34
   - DOMAIN-KEYWORD,lzzy
   - DOMAIN-KEYWORD,m3u8
   - DOMAIN-KEYWORD,maowushi
-  - DOMAIN-KEYWORD,modujx10
   - DOMAIN-KEYWORD,modujx11
-  - DOMAIN-KEYWORD,modujx12
-  - DOMAIN-KEYWORD,modujx13
-  - DOMAIN-KEYWORD,modujx14
-  - DOMAIN-KEYWORD,modujx15
   - DOMAIN-KEYWORD,modujx16
   - DOMAIN-KEYWORD,modujx17
   - DOMAIN-KEYWORD,phimgood
   - DOMAIN-KEYWORD,play-cdn10
+  - DOMAIN-KEYWORD,play-cdn11
   - DOMAIN-KEYWORD,play-cdn12
   - DOMAIN-KEYWORD,play-cdn13
   - DOMAIN-KEYWORD,play-cdn14
@@ -732,19 +725,19 @@ payload:
   - DOMAIN-KEYWORD,rrcdnbf5
   - DOMAIN-KEYWORD,rrcdnbf6
   - DOMAIN-KEYWORD,ryiplay18
-  - DOMAIN-KEYWORD,ryiplay21
   - DOMAIN-KEYWORD,ryplay10
   - DOMAIN-KEYWORD,ryplay11
   - DOMAIN-KEYWORD,ryplay12
   - DOMAIN-KEYWORD,ryplay14
-  - DOMAIN-KEYWORD,ryplay17
+  - DOMAIN-KEYWORD,ryplay16
   - DOMAIN-KEYWORD,ryplay4
+  - DOMAIN-KEYWORD,ryplay7
   - DOMAIN-KEYWORD,tyyszywvod
   - DOMAIN-KEYWORD,tyyszywvod1
   - DOMAIN-KEYWORD,tyyszywvod2
   - DOMAIN-KEYWORD,ukubf3
-  - DOMAIN-KEYWORD,ukubf4
   - DOMAIN-KEYWORD,ukubf5
+  - DOMAIN-KEYWORD,ukubf8
   - DOMAIN-KEYWORD,vvvip-plays33
   - DOMAIN-KEYWORD,xluuss
   - DOMAIN-KEYWORD,yyzy-play
