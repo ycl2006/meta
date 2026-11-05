@@ -240,6 +240,7 @@ payload:
   - DOMAIN,v3.vwwwxy.com
   - DOMAIN,v3.yaaabc.com
   - DOMAIN,v3.zuidazym3u8.com
+  - DOMAIN,v4.1080pzy.co
   - DOMAIN,v4.1080tg.com
   - DOMAIN,v4.bxgbnet.com
   - DOMAIN,v4.kuaichezym3u8.com
@@ -381,6 +382,7 @@ payload:
   - DOMAIN,yzzy.play-cdn7.com
   - DOMAIN,yzzy.play-cdn8.com
   - DOMAIN,yzzy.play-cdn9.com
+  - DOMAIN,yzzy1.play-cdn1.com
   - DOMAIN,yzzy1.play-cdn16.com
   - DOMAIN,yzzy1.play-cdn20.com
   - DOMAIN,yzzy21.playback-speed.com
@@ -523,6 +525,7 @@ payload:
   - DOMAIN-SUFFIX,jisuzyv.com
   - DOMAIN-SUFFIX,jszyapi.com
   - DOMAIN-SUFFIX,jyzyapi.com
+  - DOMAIN-SUFFIX,kczybf.com
   - DOMAIN-SUFFIX,kuaichezym3u8.com
   - DOMAIN-SUFFIX,kuktxu.com
   - DOMAIN-SUFFIX,lbapi9.com
@@ -594,6 +597,7 @@ payload:
   - DOMAIN-SUFFIX,moduzytuuu.com
   - DOMAIN-SUFFIX,phimgood.com
   - DOMAIN-SUFFIX,picbf.com
+  - DOMAIN-SUFFIX,play-cdn1.com
   - DOMAIN-SUFFIX,play-cdn10.com
   - DOMAIN-SUFFIX,play-cdn11.com
   - DOMAIN-SUFFIX,play-cdn12.com
@@ -683,6 +687,7 @@ payload:
   - DOMAIN-SUFFIX,yyzy-play.vip
   - DOMAIN-SUFFIX,yzzy27-play.com
   - DOMAIN-SUFFIX,yzzy28-play.com
+  - DOMAIN-SUFFIX,yzzy29-play.com
   - DOMAIN-SUFFIX,yzzy30-play.com
   - DOMAIN-SUFFIX,yzzy31-play.com
   - DOMAIN-SUFFIX,yzzy32-play.com
@@ -699,40 +704,33 @@ payload:
   - DOMAIN-SUFFIX,zuidapi.com
   - DOMAIN-SUFFIX,zuidapic.com
   - DOMAIN-SUFFIX,zuidazym3u8.com
+  - DOMAIN-KEYWORD,1080pzy
+  - DOMAIN-KEYWORD,1080tg
   - DOMAIN-KEYWORD,360zy
-  - DOMAIN-KEYWORD,baofeng9
   - DOMAIN-KEYWORD,bdzybf11
   - DOMAIN-KEYWORD,bdzybf22
-  - DOMAIN-KEYWORD,bfeng10
   - DOMAIN-KEYWORD,bfikuncdn
   - DOMAIN-KEYWORD,bfllvip
   - DOMAIN-KEYWORD,bfvvs
   - DOMAIN-KEYWORD,bfzy
-  - DOMAIN-KEYWORD,bvvvvvvv7f
-  - DOMAIN-KEYWORD,bvvvvvvvvv1f
   - DOMAIN-KEYWORD,cdnlz
   - DOMAIN-KEYWORD,cdnlz13
   - DOMAIN-KEYWORD,cdnlz14
   - DOMAIN-KEYWORD,cdnlz18
+  - DOMAIN-KEYWORD,cdnlz20
   - DOMAIN-KEYWORD,cdnlz21
   - DOMAIN-KEYWORD,cdnlz3
   - DOMAIN-KEYWORD,cdnlz4
   - DOMAIN-KEYWORD,cdnlz7
   - DOMAIN-KEYWORD,cdnlz9
-  - DOMAIN-KEYWORD,ddbbffcdn
   - DOMAIN-KEYWORD,dytt-cine
   - DOMAIN-KEYWORD,dytt-cinema
   - DOMAIN-KEYWORD,dytt-hot
   - DOMAIN-KEYWORD,dytt-network
   - DOMAIN-KEYWORD,dytt-play
-  - DOMAIN-KEYWORD,dytt-see
   - DOMAIN-KEYWORD,dytt-tvs
   - DOMAIN-KEYWORD,feifei-kan
   - DOMAIN-KEYWORD,feifei-play
-  - DOMAIN-KEYWORD,fengbao12
-  - DOMAIN-KEYWORD,fengbao13
-  - DOMAIN-KEYWORD,fengbao14
-  - DOMAIN-KEYWORD,fengbao8
   - DOMAIN-KEYWORD,ffzy
   - DOMAIN-KEYWORD,ffzy-bofang
   - DOMAIN-KEYWORD,ffzy-online1
@@ -741,7 +739,6 @@ payload:
   - DOMAIN-KEYWORD,ffzy-online6
   - DOMAIN-KEYWORD,ffzy-play10
   - DOMAIN-KEYWORD,ffzy-play5
-  - DOMAIN-KEYWORD,ffzy-play8
   - DOMAIN-KEYWORD,ffzy-play9
   - DOMAIN-KEYWORD,ffzy-plays
   - DOMAIN-KEYWORD,gsuus
@@ -754,15 +751,16 @@ payload:
   - DOMAIN-KEYWORD,huyall
   - DOMAIN-KEYWORD,jisuzyv
   - DOMAIN-KEYWORD,jszy
+  - DOMAIN-KEYWORD,kczybf
   - DOMAIN-KEYWORD,kuaichezym3u8
   - DOMAIN-KEYWORD,kuktxu
   - DOMAIN-KEYWORD,lbsl2026
-  - DOMAIN-KEYWORD,lfthirtytwo
   - DOMAIN-KEYWORD,lz-cdn11
   - DOMAIN-KEYWORD,lz-cdn12
   - DOMAIN-KEYWORD,lz-cdn13
   - DOMAIN-KEYWORD,lz-cdn14
   - DOMAIN-KEYWORD,lz-cdn5
+  - DOMAIN-KEYWORD,lz-cdn9
   - DOMAIN-KEYWORD,lzcdn10
   - DOMAIN-KEYWORD,lzcdn23
   - DOMAIN-KEYWORD,lzcdn27
@@ -783,6 +781,7 @@ payload:
   - DOMAIN-KEYWORD,modujx16
   - DOMAIN-KEYWORD,modujx17
   - DOMAIN-KEYWORD,phimgood
+  - DOMAIN-KEYWORD,play-cdn1
   - DOMAIN-KEYWORD,play-cdn10
   - DOMAIN-KEYWORD,play-cdn11
   - DOMAIN-KEYWORD,play-cdn12
@@ -802,18 +801,18 @@ payload:
   - DOMAIN-KEYWORD,power34play
   - DOMAIN-KEYWORD,ppqrrs
   - DOMAIN-KEYWORD,qqqrst
-  - DOMAIN-KEYWORD,rrcdnbf5
-  - DOMAIN-KEYWORD,rrcdnbf6
   - DOMAIN-KEYWORD,ryiplay18
   - DOMAIN-KEYWORD,ryiplay20
+  - DOMAIN-KEYWORD,ryiplay21
+  - DOMAIN-KEYWORD,ryplay10
+  - DOMAIN-KEYWORD,ryplay11
+  - DOMAIN-KEYWORD,ryplay12
   - DOMAIN-KEYWORD,ryplay14
   - DOMAIN-KEYWORD,ryplay16
   - DOMAIN-KEYWORD,ryplay17
   - DOMAIN-KEYWORD,tyyszywvod
   - DOMAIN-KEYWORD,tyyszywvod1
   - DOMAIN-KEYWORD,tyyszywvod2
-  - DOMAIN-KEYWORD,ukubf3
-  - DOMAIN-KEYWORD,ukubf4
   - DOMAIN-KEYWORD,ukubf5
   - DOMAIN-KEYWORD,ukubf8
   - DOMAIN-KEYWORD,vvvip-plays33
@@ -823,11 +822,11 @@ payload:
   - DOMAIN-KEYWORD,yzzy
   - DOMAIN-KEYWORD,yzzy27-play
   - DOMAIN-KEYWORD,yzzy28-play
+  - DOMAIN-KEYWORD,yzzy29-play
   - DOMAIN-KEYWORD,yzzy30-play
   - DOMAIN-KEYWORD,yzzy31-play
   - DOMAIN-KEYWORD,yzzy32-play
   - DOMAIN-KEYWORD,yzzy37-play
-  - DOMAIN-KEYWORD,yzzy5-play
   - DOMAIN-KEYWORD,yzzyhd-play
   - DOMAIN-KEYWORD,yzzyssvip-36
   - DOMAIN-KEYWORD,yzzyvip-29
