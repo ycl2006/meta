@@ -396,8 +396,10 @@ payload:
   - DOMAIN,vod.guoluche.com
   - DOMAIN,vod.healthcareqh.com
   - DOMAIN,vod.lyhuicheng.com
+  - DOMAIN,vod1.kczybf.com
   - DOMAIN,vod1.maowushi.com
   - DOMAIN,vod1.pptvoss.com
+  - DOMAIN,vod2.kczybf.com
   - DOMAIN,vod2.maowushi.com
   - DOMAIN,vod2.pptvoss.com
   - DOMAIN,vod6.bdzybf11.com
@@ -441,6 +443,7 @@ payload:
   - DOMAIN-SUFFIX,b8bf.com
   - DOMAIN-SUFFIX,baofeng10.com
   - DOMAIN-SUFFIX,baofeng11.com
+  - DOMAIN-SUFFIX,baofeng12.com
   - DOMAIN-SUFFIX,baofeng9.com
   - DOMAIN-SUFFIX,bdzybf11.com
   - DOMAIN-SUFFIX,bdzybf22.com
@@ -760,6 +763,7 @@ payload:
   - DOMAIN-SUFFIX,zuidapic.com
   - DOMAIN-SUFFIX,zuidazym3u8.com
   - DOMAIN-KEYWORD,360zy
+  - DOMAIN-KEYWORD,baofeng12
   - DOMAIN-KEYWORD,bdzybf11
   - DOMAIN-KEYWORD,bdzybf22
   - DOMAIN-KEYWORD,bfikuncdn
@@ -768,28 +772,34 @@ payload:
   - DOMAIN-KEYWORD,bfzy
   - DOMAIN-KEYWORD,cdnlz
   - DOMAIN-KEYWORD,cdnlz13
+  - DOMAIN-KEYWORD,cdnlz14
   - DOMAIN-KEYWORD,cdnlz18
   - DOMAIN-KEYWORD,cdnlz21
   - DOMAIN-KEYWORD,cdnlz28
   - DOMAIN-KEYWORD,cdnlz7
+  - DOMAIN-KEYWORD,cdnlz9
   - DOMAIN-KEYWORD,dytt-cine
   - DOMAIN-KEYWORD,dytt-cinema
   - DOMAIN-KEYWORD,dytt-hot
   - DOMAIN-KEYWORD,dytt-kan
-  - DOMAIN-KEYWORD,dytt-network
   - DOMAIN-KEYWORD,dytt-play
   - DOMAIN-KEYWORD,dyttplay1
   - DOMAIN-KEYWORD,dyttzyv
   - DOMAIN-KEYWORD,feifei-kan
   - DOMAIN-KEYWORD,feifei-play
+  - DOMAIN-KEYWORD,feifei-video
+  - DOMAIN-KEYWORD,fengbao13
+  - DOMAIN-KEYWORD,fengbao14
   - DOMAIN-KEYWORD,ffzy
   - DOMAIN-KEYWORD,ffzy-bofang
+  - DOMAIN-KEYWORD,ffzy-online2
   - DOMAIN-KEYWORD,ffzy-online3
   - DOMAIN-KEYWORD,ffzy-online5
   - DOMAIN-KEYWORD,ffzy-online6
+  - DOMAIN-KEYWORD,ffzy-play10
   - DOMAIN-KEYWORD,ffzy-play2
   - DOMAIN-KEYWORD,ffzy-play5
-  - DOMAIN-KEYWORD,ffzy-play8
+  - DOMAIN-KEYWORD,ffzy-play9
   - DOMAIN-KEYWORD,ffzy-plays
   - DOMAIN-KEYWORD,ffzy-plays50
   - DOMAIN-KEYWORD,ffzyread2
@@ -801,8 +811,10 @@ payload:
   - DOMAIN-KEYWORD,high25-playback
   - DOMAIN-KEYWORD,high26-playback
   - DOMAIN-KEYWORD,huyall
+  - DOMAIN-KEYWORD,ijycnd
   - DOMAIN-KEYWORD,jisuzyv
   - DOMAIN-KEYWORD,jszy
+  - DOMAIN-KEYWORD,kczybf
   - DOMAIN-KEYWORD,kuaichezym3u8
   - DOMAIN-KEYWORD,kuktxu
   - DOMAIN-KEYWORD,lbsl2026
@@ -810,20 +822,36 @@ payload:
   - DOMAIN-KEYWORD,lz-cdn11
   - DOMAIN-KEYWORD,lz-cdn12
   - DOMAIN-KEYWORD,lz-cdn13
+  - DOMAIN-KEYWORD,lz-cdn14
+  - DOMAIN-KEYWORD,lz-cdn3
   - DOMAIN-KEYWORD,lz-cdn5
+  - DOMAIN-KEYWORD,lz-cdn9
   - DOMAIN-KEYWORD,lzcdn10
   - DOMAIN-KEYWORD,lzcdn23
   - DOMAIN-KEYWORD,lzcdn27
   - DOMAIN-KEYWORD,lzcdn31
+  - DOMAIN-KEYWORD,lzcdnv35
+  - DOMAIN-KEYWORD,lzv22
   - DOMAIN-KEYWORD,lzv34
   - DOMAIN-KEYWORD,lzv40
   - DOMAIN-KEYWORD,lzzy
   - DOMAIN-KEYWORD,m3u8
   - DOMAIN-KEYWORD,maowushi
-  - DOMAIN-KEYWORD,modujx11
   - DOMAIN-KEYWORD,modujx17
+  - DOMAIN-KEYWORD,play-cdn10
+  - DOMAIN-KEYWORD,play-cdn11
+  - DOMAIN-KEYWORD,play-cdn12
+  - DOMAIN-KEYWORD,play-cdn13
+  - DOMAIN-KEYWORD,play-cdn14
+  - DOMAIN-KEYWORD,play-cdn15
+  - DOMAIN-KEYWORD,play-cdn16
   - DOMAIN-KEYWORD,play-cdn17
+  - DOMAIN-KEYWORD,play-cdn18
   - DOMAIN-KEYWORD,play-cdn19
+  - DOMAIN-KEYWORD,play-cdn2
+  - DOMAIN-KEYWORD,play-cdn6
+  - DOMAIN-KEYWORD,play-cdn7
+  - DOMAIN-KEYWORD,play-cdn9
   - DOMAIN-KEYWORD,playback-speed
   - DOMAIN-KEYWORD,power34play
   - DOMAIN-KEYWORD,ppqrrs
@@ -835,11 +863,12 @@ payload:
   - DOMAIN-KEYWORD,ryplay12
   - DOMAIN-KEYWORD,ryplay14
   - DOMAIN-KEYWORD,ryplay17
+  - DOMAIN-KEYWORD,ryplay4
+  - DOMAIN-KEYWORD,ryplay7
   - DOMAIN-KEYWORD,tyyszywvod
   - DOMAIN-KEYWORD,tyyszywvod1
   - DOMAIN-KEYWORD,tyyszywvod2
   - DOMAIN-KEYWORD,ukubf3
-  - DOMAIN-KEYWORD,ukubf5
   - DOMAIN-KEYWORD,ukubf8
   - DOMAIN-KEYWORD,xluuss
   - DOMAIN-KEYWORD,yaaabc
@@ -853,7 +882,6 @@ payload:
   - DOMAIN-KEYWORD,yzzy33-play
   - DOMAIN-KEYWORD,yzzy37-play
   - DOMAIN-KEYWORD,yzzyhd-play
-  - DOMAIN-KEYWORD,yzzyssvip-36
   - DOMAIN-KEYWORD,yzzyvip-29
   - DOMAIN-KEYWORD,yzzyvip-35
   - DOMAIN-KEYWORD,zuidazym3u8
